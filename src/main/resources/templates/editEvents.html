@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Event</title>
+    <link rel="stylesheet" th:href="@{/CSS/main.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Quicksand:wght@600&family=Roboto+Serif:opsz@8..144&family=Roboto:ital,wght@1,300&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.cdnfonts.com/css/montreal" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+</head>
+<body>
+    <section class="event_section">
+        <header>
+            <nav class="Admin_navbar">
+                <div class="logo">
+                    <div ><iconify-icon  class="logo_log" icon="ri:movie-2-line"  width="50" height="50"></iconify-icon></div>
+                    <div class="logo_content"><a href="./dashboard.html">Anmte</a></div>
+                </div>
+                <div class="admin_nav_content">
+                    <div class="icon">
+                        <iconify-icon icon="material-symbols:event-list" style="color: #fc0000;" width="35" height="35"></iconify-icon>
+                    </div>
+                    <div class="head-content">
+                        <h2>Events/<span>Create Events</span></h2>
+                    </div>
+                </div>
+                <div class="admin_nav_profile">
+                    <div class="search">
+                        <iconify-icon icon="ion:search" style="color: black;" width="35" height="35"></iconify-icon>
+                    </div> 
+                    <div class="profile_icon">
+                        <iconify-icon icon="mdi:user-outline" style="color: black;" width="40" height="40"></iconify-icon> 
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="event_body">
+            <div class="side_bar">
+                <span class="create_event">
+                    <a href="./CreateEvent.html"><button type="submit">+ New Event</button></a>
+                </span>
+                <div class="dashboard" >
+                    <iconify-icon class="iconify-icon" icon="solar:hamburger-menu-broken"  width="30" height="30"></iconify-icon>
+                    <a href="./dashboard.html">Dashboard</a>
+                </div>
+                <div class="event">
+                    <div class="event_div1">
+                        <iconify-icon id="active" class="iconify-icon"  icon="material-symbols:event-list"  width="27" height="30"></iconify-icon>
+                        <div class="event-log">
+                            <h2 id="active">Events</h2>
+                            <iconify-icon id="active" class="iconify-icon" icon="solar:alt-arrow-down-linear"  width="25" height="25"></iconify-icon>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="event-dropdown">
+                    <a th:href="@{/event}" id="active">Create Event</a>
+                    <a th:href="@{/view}">Event Details</a>
+                    <a href="./cusotmer.html">Customers</a>
+                    <a href="./viewStocks.html">Stocks</a>
+                    <a href="./viewReview,html">Reviews</a>
+                </div>
+                <div class="event">
+                    <div class="event_div1">
+                        <iconify-icon class="iconify-icon" icon="lets-icons:video-light"  width="30" height="30"></iconify-icon>
+                        <div class="event-log">
+                            <h2>Videos</h2>
+                            <iconify-icon class="iconify-icon" icon="solar:alt-arrow-down-linear"  width="25" height="25"></iconify-icon>
+                        </div>    
+                    </div>
+                    
+                </div>
+                <div class="event-dropdown">
+                    <a href="./addAnime.html">Add Anime</a>
+                    <a href="./viewAnime.html">Anime Details</a>
+                    <a href="./animeReview.html">Reviews</a>
+                </div>
+                <div class="dashboard">
+                <iconify-icon class="iconify-icon" icon="heroicons:users"  width="28" height="30"></iconify-icon>
+                <a href="./users.html">Users</a>
+                </div>
+            </div>
+            <div class="event_content">
+
+                <!-- Fill the Form -->
+
+                <form th:action="@{/event/{id}(id=${events.eventId})}" th:object="${events}" method="post">
+                    <h2>Create an Event</h2>
+                    <div class="eventClass_logo">
+                        <iconify-icon  class="eventClasslogo_log" icon="ri:movie-2-line"  width="20" height="20"></iconify-icon>
+                        <h2>Anmte</h2>
+                    </div>
+                    <div class="event_form_content">
+                        <div class="content_left_side">
+                            <div class="form_div">
+                                <label>Title</label><br>
+                                <input type="text" name="event_title" th:field="*{eventTitle}" placeholder="Title of Event"> 
+                            </div>
+                            <div id="form_div_id">
+                                <div class="div_two">
+                                    <label>Start Date</label><br>
+                                    <input type="date" name="start_date" th:field="*{startDate}" placeholder="yyyy-MM-dd"> 
+                                </div>
+                                <div class="div_two">
+                                    <label>End Date</label><br>
+                                    <input type="date" name="end_date" th:field="*{endDate}" placeholder="yyyy-MM-dd"> 
+                                </div>
+                            </div>
+                            <div id="form_div_id">
+                                <div class="div_two">
+                                    <label>Start Time </label><br>
+                                    <input type="time" name="start_time" th:field="*{startTime}" placeholder="hh:mm a"> 
+                                </div>
+                                <div class="div_two">
+                                    <label>End Time</label><br>
+                                    <input type="time" name="end_time" th:field="*{endTime}" placeholder="hh:mm a"> 
+                                </div>
+                            </div>
+                            <div class="form_div">
+                                <label>Location</label><br>
+                                <input type="text" name="event_location" th:field="*{eventLocation}" placeholder="Location"> 
+                            </div>
+                            <div class="form_div">
+                                <label>Allocated Tickets</label><br>
+                                <input id ="aloc" type="number" name="allocated" th:field="*{allocatedTickets}" value="1"> 
+                            </div>
+                            <div class="form_div">
+                                <label>Ticket Price</label><br>
+                                <input id ="price" type="number" name="ticket_price" th:field="*{ticketPrice}" value="0.00"> 
+                            </div>
+                            <div class="form_div"> 
+                                <label>Description</label><br>
+                                <textarea rows="4" column="10" name="event_description" th:field="*{eventDescription}" placeholder="Write short description"></textarea>
+                            </div>
+                        </div>
+                        <div class="content_right_side">
+                            <div class="form_div">
+                                <label>Event Image</label><br>
+                                <input type="file" id="event_image" name="event_image" th:field="*{eventImage}" accept="image/*" style= "width: 470px "required><br>
+                                 <img id="image_preview" src="#" alt="Product Image Preview" style="height: 380px; width: 518px; display: none"> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event_button_content">
+                        <button type="submit">Add Event</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <script>
+        var dropdown = document.getElementsByClassName("event");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === "flex") {
+            dropdownContent.style.display = "none";
+            } else {
+            dropdownContent.style.display = "flex";
+            }
+        });
+        }
+
+        // image output or priview
+        const imageInput = document.getElementById("event_image");
+        const imagePreview = document.getElementById("image_preview");
+    
+        imageInput.addEventListener("change", function () {
+            const file = this.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = "block"; // Display the image
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                // Clear the preview if no file is selected
+                imagePreview.src = "#";
+                imagePreview.style.display = "none"; // Hide the image
+            }
+        });
+    </script>
+</body>
+</html>

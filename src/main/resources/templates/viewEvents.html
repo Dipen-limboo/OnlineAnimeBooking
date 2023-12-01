@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event</title>
+    <link rel="stylesheet" href="../CSS/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Quicksand:wght@600&family=Roboto+Serif:opsz@8..144&family=Roboto:ital,wght@1,300&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.cdnfonts.com/css/montreal" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+</head>
+<body>
+    <section class="event_section">
+        <header>
+            <nav class="Admin_navbar">
+                <div class="logo">
+                    <div ><iconify-icon  class="logo_log" icon="ri:movie-2-line"  width="50" height="50"></iconify-icon></div>
+                    <div class="logo_content"><a href="./dashboard.html">Anmte</a></div>
+                </div>
+                <div class="admin_nav_content">
+                    <div class="icon">
+                        <iconify-icon icon="material-symbols:event-list" style="color: #fc0000;" width="35" height="35"></iconify-icon>
+                    </div>
+                    <div class="head-content">
+                        <h2>Events/<span>Event Details</span></h2>
+                    </div>
+                </div>
+                <div class="admin_nav_profile">
+                    <div class="search">
+                        <iconify-icon icon="ion:search" style="color: black;" width="35" height="35"></iconify-icon>
+                    </div> 
+                    <div class="profile_icon">
+                        <iconify-icon icon="mdi:user-outline" style="color: black;" width="40" height="40"></iconify-icon> 
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="event_body">
+            <div class="side_bar">
+                <span class="create_event">
+                    <a th:href="@{/event}"><button type="submit">+ New Event</button></a>
+                </span>
+                <div class="dashboard" >
+                    <iconify-icon class="iconify-icon" icon="solar:hamburger-menu-broken"  width="30" height="30"></iconify-icon>
+                    <a href="./dashboard.html">Dashboard</a>
+                </div>
+                <div class="event">
+                    <div class="event_div1">
+                        <iconify-icon id="active" class="iconify-icon"  icon="material-symbols:event-list"  width="27" height="30"></iconify-icon>
+                        <div class="event-log">
+                            <h2 id="active">Events</h2>
+                            <iconify-icon id="active" class="iconify-icon" icon="solar:alt-arrow-down-linear"  width="25" height="25"></iconify-icon>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="event-dropdown">
+                    <a th:href="@{/event}">Create Event</a>
+                    <a href="./viewEvent.html" id="active" >Event Details</a>
+                    <a href="./cusotmer.html">Customers</a>
+                    <a href="./viewStocks.html">Stocks</a>
+                    <a href="./viewReview,html">Reviews</a>
+                </div>
+                <div class="event">
+                    <div class="event_div1">
+                        <iconify-icon class="iconify-icon" icon="lets-icons:video-light"  width="30" height="30"></iconify-icon>
+                        <div class="event-log">
+                            <h2>Videos</h2>
+                            <iconify-icon class="iconify-icon" icon="solar:alt-arrow-down-linear"  width="25" height="25"></iconify-icon>
+                        </div>    
+                    </div>
+                    
+                </div>
+                <div class="event-dropdown">
+                    <a href="./addAnime.html">Add Anime</a>
+                    <a href="./viewAnime.html">Anime Details</a>
+                    <a href="./animeReview.html">Reviews</a>
+                </div>
+                <div class="dashboard">
+                <iconify-icon class="iconify-icon" icon="heroicons:users"  width="28" height="30"></iconify-icon>
+                <a href="./users.html">Users</a>
+                </div>
+            </div>
+            <div class="event_content">
+
+                <!-- Fill the Form -->
+
+                <div class="event_form" >
+                    <h2>Event Details</h2>
+                    <div class="eventClass_logo">
+                        <iconify-icon  class="eventClasslogo_log" icon="ri:movie-2-line"  width="20" height="20"></iconify-icon>
+                        <h2>Anmte</h2>
+                    </div>
+                    <div th:if="${#lists.isEmpty(events)}" class="empty_event">
+                        <p>No events available.</p>
+                    </div>
+                    <div th:if="${not #lists.isEmpty(events)}" class="event_table">
+                        <table>
+                            <tr>
+                                <th>Title</th>
+                                <th>Image</th>
+                                <th>Price</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Action</th>
+                            </tr>
+                
+                            <tr th:each="event: ${events}">
+                                <td th:text="${event.eventTitle}"></td>
+                                <td th:text="${event.eventImage}"></td>
+                                <td th:text="${event.ticketPrice}"></td>
+                                <td th:text="${event.startDate}"></td>
+                                <td th:text="${event.endDate}"></td>
+                                <td>
+                                    <div class="event_action" >
+                                        <button type="submit"><a th:href="@{/event/edit/{id}(id=${event.eventId})}">Edit</a></button>
+                                        <button type="submit"><a th:href="@{/event/{id}(id=${event.eventId})}">Delete</a></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        document.getElementById("aloc").defaultValue = "1";
+	    document.getElementById("price").defaultValue = "0";
+        var dropdown = document.getElementsByClassName("event");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === "flex") {
+            dropdownContent.style.display = "none";
+            } else {
+            dropdownContent.style.display = "flex";
+            }
+        });
+        }
+
+        // image output or priview
+        const imageInput = document.getElementById("event_image");
+        const imagePreview = document.getElementById("image_preview");
+    
+        imageInput.addEventListener("change", function () {
+            const file = this.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = "block"; // Display the image
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                // Clear the preview if no file is selected
+                imagePreview.src = "#";
+                imagePreview.style.display = "none"; // Hide the image
+            }
+        });
+    </script>
+</body>
+</html>
