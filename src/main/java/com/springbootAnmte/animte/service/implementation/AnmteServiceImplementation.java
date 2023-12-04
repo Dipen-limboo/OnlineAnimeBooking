@@ -12,7 +12,9 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.springbootAnmte.animte.entity.Anime;
 import com.springbootAnmte.animte.entity.Event;
+import com.springbootAnmte.animte.repository.AnimeRepo;
 import com.springbootAnmte.animte.repository.AnmteEntityRepository;
 import com.springbootAnmte.animte.service.AnmteService;
 
@@ -87,6 +89,27 @@ public class AnmteServiceImplementation implements AnmteService{
 		} catch (MalformedURLException e) {
 			throw new RuntimeException("Error: "+ e.getMessage());
 		}
+	}
+
+//next repository for anime
+	AnimeRepo anp;
+	@Override
+	public Anime saveAnime(Anime anime) {
+		return anp.save(anime);
+	}
+	
+	@Override
+	public String saveAnime(MultipartFile image, Anime anime) {
+	    try {
+	        String imageName = image.getOriginalFilename();
+	        Files.copy(image.getInputStream(), this.root.resolve(imageName));
+	        return imageName;
+	    } catch (Exception e) {
+	        if (e instanceof FileAlreadyExistsException) {
+	            throw new RuntimeException("A file of that name already exists.");
+	        }
+	        throw new RuntimeException(e.getMessage());
+	    }
 	}
 
 

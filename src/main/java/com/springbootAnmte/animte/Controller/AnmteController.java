@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.springbootAnmte.animte.entity.Anime;
 import com.springbootAnmte.animte.entity.Event;
 import com.springbootAnmte.animte.service.AnmteService;
 
@@ -97,4 +98,17 @@ public class AnmteController {
 	            .body(file);
 	}
 
+	@GetMapping("/anime")
+	public String addAnime(Model model) {
+		Anime anime = new Anime();
+		model.addAttribute("anime", anime);
+		return "addAnime";
+	}
+	@PostMapping("/anime")
+	public String saveNewAnime(@ModelAttribute("anime") Anime anime, Model model, @RequestParam("image") MultipartFile image, @RequestParam("video") MultipartFile video, @RequestParam("video") MultipartFile trailer ) {
+	    String imageName = anmteService.saveAnime(image, anime);	    
+	    anime.setAnimeImage(imageName); // Set the image name in the Event object
+	    anmteService.saveAnime(anime); // Save the event data with the image name
+	    return "redirect:/view";
+	}
 }
