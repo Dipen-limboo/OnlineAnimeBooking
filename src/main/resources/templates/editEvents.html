@@ -102,21 +102,21 @@
                             <div id="form_div_id">
                                 <div class="div_two">
                                     <label>Start Date</label><br>
-                                    <input type="date" name="start_date" th:field="*{startDate}" placeholder="yyyy-MM-dd"> 
+                                    <input type="date" name="start_date" th:value ="${events.startDate}" th:field="*{startDate}" placeholder="yyyy-MM-dd"> 
                                 </div>
                                 <div class="div_two">
                                     <label>End Date</label><br>
-                                    <input type="date" name="end_date" th:field="*{endDate}" placeholder="yyyy-MM-dd"> 
+                                    <input type="date" name="end_date" th:value ="${events.endDate}" th:field="*{endDate}" placeholder="yyyy-MM-dd"> 
                                 </div>
                             </div>
                             <div id="form_div_id">
                                 <div class="div_two">
                                     <label>Start Time </label><br>
-                                    <input type="time" name="start_time" th:field="*{startTime}" placeholder="hh:mm a"> 
+                                    <input type="time" name="start_time" th:value=${events.startTime} th:field="*{startTime}" placeholder="hh:mm a"> 
                                 </div>
                                 <div class="div_two">
                                     <label>End Time</label><br>
-                                    <input type="time" name="end_time" th:field="*{endTime}" placeholder="hh:mm a"> 
+                                    <input type="time" name="end_time" th:value=${events.endTime} th:field="*{endTime}" placeholder="hh:mm a"> 
                                 </div>
                             </div>
                             <div class="form_div">

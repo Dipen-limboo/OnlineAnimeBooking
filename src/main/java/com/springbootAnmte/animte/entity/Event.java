@@ -29,9 +29,11 @@ public class Event {
     private String eventTitle;
 
     @Column(name="start_date", nullable=false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
     @Column(name="end_date", nullable=false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 
     @Column(name="start_time", nullable=false)

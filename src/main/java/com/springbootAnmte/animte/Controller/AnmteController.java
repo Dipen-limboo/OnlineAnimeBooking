@@ -39,12 +39,9 @@ public class AnmteController {
 	
 	@PostMapping("/event")
 	public String saveNewEvent(@ModelAttribute("event") Event event, Model model, @RequestParam("image") MultipartFile file) {
-	    System.out.println("Before inserting the images in folder");
 	    String imageName = anmteService.save(file, event); // Save the file and get the image name
 	    event.setEventImage(imageName); // Set the image name in the Event object
-	    System.out.println("After inserting the images in folder");
 	    anmteService.saveEvent(event); // Save the event data with the image name
-	    System.out.println("Save in databases");
 	    return "redirect:/view";
 	}
 

@@ -401,13 +401,16 @@ body a{
     flex-direction: row;
 }
 
-.event_action button{
+
+.event_action a button{
     flex-grow: 1;
     border-radius: 10px;
     padding: 5px;
-    width: 22px;
+    width: 82px;
     margin: 5px;
     background-color: var(--secondary-color);
+    color: var(--primary-color);
+  	font-size: 18px;
 }
 
 
@@ -415,7 +418,7 @@ body a{
     color:var(--primary-color);
 }
 
-.event_action button:hover > a{
+.event_action a:hover > button{
     font-size:21px;
 }  
 

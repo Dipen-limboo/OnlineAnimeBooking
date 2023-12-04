@@ -117,8 +117,8 @@
                                 <td th:text="${event.endDate}"></td>
                                 <td>
                                     <div class="event_action" >
-                                        <button type="submit"><a th:href="@{/event/edit/{id}(id=${event.eventId})}">Edit</a></button>
-                                        <button type="submit"><a th:href="@{/event/{id}(id=${event.eventId})}">Delete</a></button>
+                                        <a th:href="@{/event/edit/{id}(id=${event.eventId})}"><button type="submit">Edit</button></a>
+                                        <a th:href="@{/event/{id}(id=${event.eventId})}"><button type="submit">Delete</button></a>
                                     </div>
                                 </td>
                             </tr>
