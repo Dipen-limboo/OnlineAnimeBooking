@@ -21,15 +21,22 @@ import com.springbootAnmte.animte.service.AnmteService;
 @Service
 public class AnmteServiceImplementation implements AnmteService{
 	AnmteEntityRepository anmteRepository;
-	private final Path root = Paths.get("./src/main/resources/static/Images");
-
+	AnimeRepo anp;
 	
-
-	public AnmteServiceImplementation(AnmteEntityRepository anmteRepository) {
+	
+	public AnmteServiceImplementation(AnmteEntityRepository anmteRepository, AnimeRepo anp) {
 		super();
 		this.anmteRepository = anmteRepository;
+		this.anp = anp;
 	}
 
+
+
+
+
+
+	//------------------------------------Event Panel---------------------------
+	private final Path root = Paths.get("./src/main/resources/static/Images");
 
 	@Override
 	public List<Event> getallEvent() {
@@ -90,9 +97,20 @@ public class AnmteServiceImplementation implements AnmteService{
 			throw new RuntimeException("Error: "+ e.getMessage());
 		}
 	}
+	
+	
+	
+	
+	
 
-//next repository for anime
-	AnimeRepo anp;
+	//--------------------------Anime Panel-------------------------------
+	
+	private final Path videoRoot = Paths.get("./src/main/resources/static/Videos");
+	private final Path trailerRoot = Paths.get("./src/main/resources/static/Trailer");
+
+	
+
+
 	@Override
 	public Anime saveAnime(Anime anime) {
 		return anp.save(anime);
@@ -110,6 +128,41 @@ public class AnmteServiceImplementation implements AnmteService{
 	        }
 	        throw new RuntimeException(e.getMessage());
 	    }
+	}
+
+
+	@Override
+	public String saveVideo(MultipartFile video, Anime anime) {
+		try {
+	        String videoName = video.getOriginalFilename();
+	        Files.copy(video.getInputStream(), this.videoRoot.resolve(videoName));
+	        return videoName;
+	    } catch (Exception e) {
+	        if (e instanceof FileAlreadyExistsException) {
+	            throw new RuntimeException("A file of that name already exists.");
+	        }
+	        throw new RuntimeException(e.getMessage());
+	    }
+	}
+
+
+	@Override
+	public String saveTrailer(MultipartFile trailer, Anime anime) {
+		try {
+	        String trailerName = trailer.getOriginalFilename();
+	        Files.copy(trailer.getInputStream(), this.trailerRoot.resolve(trailerName));
+	        return trailerName;
+	    } catch (Exception e) {
+	        if (e instanceof FileAlreadyExistsException) {
+	            throw new RuntimeException("A file of that name already exists.");
+	        }
+	        throw new RuntimeException(e.getMessage());
+	    }
+	}
+
+	@Override
+	public List<Anime> getallAnime() {
+		return anp.findAll();
 	}
 
 

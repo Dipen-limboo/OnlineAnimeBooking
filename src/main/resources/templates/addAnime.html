@@ -74,7 +74,7 @@
                 </div>
                 <div class="event-dropdown">
                     <a th:href="@{/anime}" id="active">Add Anime</a>
-                    <a href="./viewAnime.html">Anime Details</a>
+                    <a th:href="@{/viewAnime}">Anime Details</a>
                     <a href="./animeReview.html">Reviews</a>
                 </div>
                 <div class="dashboard">
@@ -86,7 +86,7 @@
 
                 <!-- Fill the Form -->
 
-                <form class="event_form" th:action="@{/anime}" th:object="${anime}" method="post">
+                <form class="event_form" th:action="@{/anime}" th:object="${anime}" method="post"  enctype="multipart/form-data">
                     <h2>Add an Anime</h2>
                     <div class="eventClass_logo">
                         <iconify-icon  class="eventClasslogo_log" icon="ri:movie-2-line"  width="20" height="20"></iconify-icon>

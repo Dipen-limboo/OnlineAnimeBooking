@@ -29,7 +29,8 @@ public class AnmteController {
 		super();
 		this.anmteService = anmteService;
 	}
-	
+		
+	//------------------------------------Event Panel---------------------------
 	@GetMapping("/event")
 	public String createEvent(Model model) {
 		Event event = new Event();
@@ -46,9 +47,7 @@ public class AnmteController {
 	    return "redirect:/view";
 	}
 
-	
-	
-
+		
 	@GetMapping("/view")
 	public String listEvents(Model model) {
 		model.addAttribute("events", anmteService.getallEvent());
@@ -64,7 +63,6 @@ public class AnmteController {
 	    return "editEvents";
 	}
 
-	
 	@PostMapping("event/{id}")
 	public String updateEvents(@PathVariable Long id, @ModelAttribute("event") Event event, Model model,  @RequestParam("image") MultipartFile file) {
 		String imageName = anmteService.save(file, event);
@@ -89,6 +87,7 @@ public class AnmteController {
 		anmteService.deleteEventById(id);
 		return "redirect:/view";
 	}
+	
 	@GetMapping("/images/{filename}")
 	@ResponseBody
 	public ResponseEntity<Resource> serveImage(@PathVariable String filename) {
@@ -97,18 +96,38 @@ public class AnmteController {
 	            .header(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=\"" + file.getFilename() + "\"")
 	            .body(file);
 	}
+	
+	
+	
+	
 
+	
+	
+	
+	
+	//--------------------------Anime Panel-------------------------------
 	@GetMapping("/anime")
 	public String addAnime(Model model) {
 		Anime anime = new Anime();
 		model.addAttribute("anime", anime);
 		return "addAnime";
 	}
+	
 	@PostMapping("/anime")
-	public String saveNewAnime(@ModelAttribute("anime") Anime anime, Model model, @RequestParam("image") MultipartFile image, @RequestParam("video") MultipartFile video, @RequestParam("video") MultipartFile trailer ) {
-	    String imageName = anmteService.saveAnime(image, anime);	    
+	public String saveNewAnime(@ModelAttribute("anime") Anime anime, Model model, @RequestParam("image") MultipartFile image, @RequestParam("video") MultipartFile video, @RequestParam("trailer") MultipartFile trailer ) {
+	    String imageName = anmteService.saveAnime(image,anime);
+	    String videoName = anmteService.saveVideo(video, anime);
+	    String trailerName = anmteService.saveTrailer(trailer, anime);
 	    anime.setAnimeImage(imageName); // Set the image name in the Event object
+	    anime.setAnimeVideo(videoName);
+	    anime.setAnimeTrailer(trailerName);
 	    anmteService.saveAnime(anime); // Save the event data with the image name
-	    return "redirect:/view";
+	    return "redirect:/viewAnime";
+	}
+	
+	@GetMapping("/viewAnime")
+	public String listAnime(Model model) {
+		model.addAttribute("animes", anmteService.getallAnime());
+		return "animeDetails";
 	}
 }

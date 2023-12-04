@@ -18,6 +18,9 @@ public interface AnmteService {
 	
 	//anime;
 	String saveAnime(MultipartFile image, Anime anime);
+	String saveVideo(MultipartFile video, Anime anime);
+	String saveTrailer(MultipartFile trailer, Anime anime);
 	Anime saveAnime(Anime anime);
+	List<Anime> getallAnime();;
 	
 }
