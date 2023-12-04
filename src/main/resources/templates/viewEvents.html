@@ -109,7 +109,9 @@
                 
                             <tr th:each="event: ${events}">
                                 <td th:text="${event.eventTitle}"></td>
-                                <td th:text="${event.eventImage}"></td>
+                                <!-- Assuming event is the object in your model -->
+								<td><img th:src="@{/images/{filename}(filename=${event.eventImage})}" alt="Event Image"></td>
+
                                 <td th:text="${event.ticketPrice}"></td>
                                 <td th:text="${event.startDate}"></td>
                                 <td th:text="${event.endDate}"></td>

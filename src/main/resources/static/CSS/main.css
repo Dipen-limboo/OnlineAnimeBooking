@@ -383,8 +383,17 @@ body a{
     text-align: center;
 }
 
+.event_table table td img {
+  width: 100%;
+  height: 20%;
+}
+
 .event_table table th{
     height: 40px;
+}
+
+.event_table tbody tr:nth-child(2n) {
+  background-color: var(--primary-color);
 }
 
 .event_action {

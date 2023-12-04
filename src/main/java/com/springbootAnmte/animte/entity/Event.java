@@ -1,8 +1,11 @@
 package com.springbootAnmte.animte.entity;
 
+
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
@@ -17,48 +20,52 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 @Table(name="events")
 public class Event {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long eventId;
-	
-	@Column(name ="event_title")
-	@NotBlank(message ="Event title is required!!")
-	private String eventTitle;
-	
-	@Column(name="start_date", nullable=false)
-	
-	private LocalDate startDate; 
-	
-	@Column(name="end_date", nullable=false)
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private long eventId;
 
-	private LocalDate endDate;
-	
-	@Column(name="start_time", nullable=false)
-	@DateTimeFormat(pattern = "hh:mm a")
-	private LocalTime startTime;
-	
-	@Column(name="end_time", nullable=false)
-	@DateTimeFormat(pattern = "hh:mm a")
-	private LocalTime endTime;
-	
-	@Column(name="event_location")
-	@NotBlank(message ="Event location is required!!")
-	private String eventLocation;
-	
-	@Column(name="allocated")
-	@NotNull(message ="Enter the allocated tickets for event!!")
-	private long allocatedTickets;
-	
-	@Column(name="event_image")
-	@NotBlank(message ="Image is required!!")
-	private String eventImage;
-	
-	@Column(name="event_description")
-	private String eventDescription;
-	
-	@Column(name="ticket_price")
-	@NotNull(message ="Price of ticket is required!!")
-	private double ticketPrice;
+    @Column(name ="event_title")
+    @NotBlank(message ="Event title is required!!")
+    private String eventTitle;
+
+    @Column(name="start_date", nullable=false)
+    private LocalDate startDate;
+
+    @Column(name="end_date", nullable=false)
+    private LocalDate endDate;
+
+    @Column(name="start_time", nullable=false)
+    @DateTimeFormat(pattern = "hh:mm a")
+    private LocalTime startTime;
+
+    @Column(name="end_time", nullable=false)
+    @DateTimeFormat(pattern = "hh:mm a")
+    private LocalTime endTime;
+
+    @Column(name="event_location")
+    @NotBlank(message ="Event location is required!!")
+    private String eventLocation;
+
+    @Column(name="allocated")
+    @NotNull(message ="Enter the allocated tickets for event!!")
+    private long allocatedTickets;
+
+    @Column(name="event_image")
+    @NotBlank(message ="Image is required!!")
+    private String eventImage;
+    
+    @Column(name="image_location")
+    @Value("${image.dir:defaultValue}")
+    private String imageLocation;
+    
+    
+
+    @Column(name="event_description")
+    private String eventDescription;
+
+    @Column(name="ticket_price")
+    @NotNull(message ="Price of ticket is required!!")
+    private double ticketPrice;
 
 	public Event() {
 		super();
@@ -70,7 +77,8 @@ public class Event {
 			LocalDate endDate, LocalTime startTime, LocalTime endTime,
 			@NotBlank(message = "Event location is required!!") String eventLocation,
 			@NotNull(message = "Enter the allocated tickets for event!!") long allocatedTickets,
-			@NotBlank(message = "Image is required!!") String eventImage, String eventDescription,
+			@NotBlank(message = "Image is required!!") String eventImage,
+			@NotBlank(message = "Image location folder is required") String imageLocation, String eventDescription,
 			@NotNull(message = "Price of ticket is required!!") double ticketPrice) {
 		super();
 		this.eventTitle = eventTitle;
@@ -81,6 +89,7 @@ public class Event {
 		this.eventLocation = eventLocation;
 		this.allocatedTickets = allocatedTickets;
 		this.eventImage = eventImage;
+		this.imageLocation = imageLocation;
 		this.eventDescription = eventDescription;
 		this.ticketPrice = ticketPrice;
 	}
@@ -150,6 +159,17 @@ public class Event {
 		this.allocatedTickets = allocatedTickets;
 	}
 
+
+	public String getImageLocation() {
+		return imageLocation;
+	}
+
+
+	public void setImageLocation(String imageLocation) {
+		this.imageLocation = imageLocation;
+	}
+
+
 	public String getEventImage() {
 		return eventImage;
 	}
@@ -172,8 +192,8 @@ public class Event {
 
 	public void setTicketPrice(double ticketPrice) {
 		this.ticketPrice = ticketPrice;
-	}  
+	}
 
-
-
+    
 }
+

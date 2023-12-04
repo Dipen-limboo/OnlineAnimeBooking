@@ -87,7 +87,7 @@
 
                 <!-- Fill the Form -->
 
-                <form class="event_form" th:action="@{/event}" th:object="${event}" method="post">
+                <form class="event_form" th:action="@{/event}" th:object="${event}" method="post"  enctype="multipart/form-data">
                     <h2>Create an Event</h2>
                     <div class="eventClass_logo">
                         <iconify-icon  class="eventClasslogo_log" icon="ri:movie-2-line"  width="20" height="20"></iconify-icon>
@@ -136,10 +136,11 @@
                                 <textarea rows="4" column="10" name="event_description" th:field="*{eventDescription}" placeholder="Write short description"></textarea>
                             </div>
                         </div>
-                        <div class="content_right_side">
+						<div class="content_right_side">
                             <div class="form_div">
                                 <label>Event Image</label><br>
-                                <input type="file" id="event_image" name="event_image" th:field="*{eventImage}" accept="image/*" style= "width: 470px "required><br>
+                                <input type="file" id="event_image" name="image" accept="image/*" style="width: 470px" required>
+   								 <input type="hidden" th:field="*{eventImage}" />
                                  <img id="image_preview" src="#" alt="Product Image Preview" style="height: 380px; width: 518px; display: none"> 
                             </div>
                         </div>

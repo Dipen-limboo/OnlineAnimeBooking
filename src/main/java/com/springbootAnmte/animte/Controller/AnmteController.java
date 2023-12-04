@@ -1,12 +1,18 @@
 package com.springbootAnmte.animte.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.springbootAnmte.animte.entity.Event;
 import com.springbootAnmte.animte.service.AnmteService;
@@ -32,10 +38,16 @@ public class AnmteController {
 	
 	
 	@PostMapping("/event")
-	public String saveNewEvent(@ModelAttribute("event") Event event) {
-		anmteService.saveEvent(event);
-		return "redirect:/view";
+	public String saveNewEvent(@ModelAttribute("event") Event event, Model model, @RequestParam("image") MultipartFile file) {
+	    System.out.println("Before inserting the images in folder");
+	    String imageName = anmteService.save(file, event); // Save the file and get the image name
+	    event.setEventImage(imageName); // Set the image name in the Event object
+	    System.out.println("After inserting the images in folder");
+	    anmteService.saveEvent(event); // Save the event data with the image name
+	    System.out.println("Save in databases");
+	    return "redirect:/view";
 	}
+
 	
 	
 
@@ -46,15 +58,18 @@ public class AnmteController {
 	}
 	
 	@GetMapping("/event/edit/{id}")
-	public String editEvents(@PathVariable Long id, Model model) {
-		model.addAttribute("events", anmteService.getEventById(id));
-	
-		return "editEvents";
-		
+	public String editEvent(@PathVariable Long id, Model model) {
+	    Event event = anmteService.getEventById(id);
+	    event.setEventImage("/images/" + event.getEventImage());
+	    event.setEventId(id);
+	    model.addAttribute("events", event);
+	    return "editEvents";
 	}
+
 	
 	@PostMapping("event/{id}")
-	public String updateEvents(@PathVariable Long id, @ModelAttribute("event") Event event, Model model) {
+	public String updateEvents(@PathVariable Long id, @ModelAttribute("event") Event event, Model model,  @RequestParam("image") MultipartFile file) {
+		String imageName = anmteService.save(file, event);
 		Event existingEvent = anmteService.getEventById(id);
 		existingEvent.setEventTitle(event.getEventTitle());
 		existingEvent.setStartDate(event.getStartDate());
@@ -65,7 +80,7 @@ public class AnmteController {
 		existingEvent.setTicketPrice(event.getTicketPrice());
 		existingEvent.setEventLocation(event.getEventLocation());
 		existingEvent.setEventDescription(event.getEventDescription());
-		existingEvent.setEventImage(event.getEventImage());
+		existingEvent.setEventImage(imageName);
 		
 		anmteService.updateEvents(existingEvent);
 		return "redirect:/view";
@@ -76,5 +91,13 @@ public class AnmteController {
 		anmteService.deleteEventById(id);
 		return "redirect:/view";
 	}
-	
+	@GetMapping("/images/{filename}")
+	@ResponseBody
+	public ResponseEntity<Resource> serveImage(@PathVariable String filename) {
+	    Resource file = anmteService.load(filename);
+	    return ResponseEntity.ok()
+	            .header(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=\"" + file.getFilename() + "\"")
+	            .body(file);
+	}
+
 }
