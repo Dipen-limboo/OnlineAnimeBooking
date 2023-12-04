@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Event</title>
-    <link rel="stylesheet" href="../CSS/main.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/main.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Quicksand:wght@600&family=Roboto+Serif:opsz@8..144&family=Roboto:ital,wght@1,300&display=swap" rel="stylesheet"> 
@@ -40,7 +40,8 @@
         <div class="event_body">
             <div class="side_bar">
                 <span class="create_event">
-					<a href="./CreateEvent.html"><button type="submit">+ New Event</button></a>                </span>
+                    <a th:href="@{/event}"><button type="submit">+ New Event</button></a>
+                </span>
                 <div class="dashboard" >
                     <iconify-icon class="iconify-icon" icon="solar:hamburger-menu-broken"  width="30" height="30"></iconify-icon>
                     <a href="./dashboard.html">Dashboard</a>
@@ -116,11 +117,11 @@
 
                             </div>
                             <div class="form_div">
-                                <label>Trailer</label><br>
-                                <input type="file" id="video_input" name="trailer" accept="video/*" multiple>
-                               	<input type="hidden" th:field="*{animeTrailer}"/>
-                                <div id="video_preview" class="video-preview"></div>
-                            </div>
+							    <label>Trailer</label><br>
+							    <input type="file" id="trailer_input" name="trailer" accept="video/*" multiple>
+							    <input type="hidden" th:field="*{animeTrailer}"/>
+							    <div id="trailer_preview" class="video-preview"></div>
+							</div>
                             
                             <div class="form_div"> 
                                 <label>Story</label><br>
@@ -129,11 +130,11 @@
                         </div>
                         <div class="content_right_side">
                             <div class="form_div">
-                                <label>Videos</label><br>
-                                <input type="file" id="video_input" name="video" accept="video/*" multiple>
-                                <input type="hidden" th:field="*{animeVideo}"/>
-                                <div id="video_preview" class="video-preview"></div>
-                            </div>
+						        <label>Videos</label><br>
+						        <input type="file" id="video_input" name="video" accept="video/*" multiple>
+						        <input type="hidden" th:field="*{animeVideo}"/>
+						        <div id="video_preview" class="video-preview"></div>
+						    </div>
                             <div class="form_div">
                                 <label>Anime Image</label><br>
                                 <input type="file" id="event_image" name="image" accept="image/*" style="width: 470px" required>
@@ -189,19 +190,34 @@
         });
 
         //video logic
-        const videoInput = document.getElementById("video_input");
-        const videoPreview = document.getElementById("video_preview");
+        const trailerInput = document.getElementById("trailer_input");
+		const trailerPreview = document.getElementById("trailer_preview");
+		
+		trailerInput.addEventListener("change", function () {
+		    trailerPreview.innerHTML = ""; // Clear previous previews
+		
+		    for (const file of this.files) {
+		        const videoElement = document.createElement("video");
+		        videoElement.src = URL.createObjectURL(file);
+		        videoElement.controls = true;
+		        trailerPreview.appendChild(videoElement);
+		    }
+		});
+		
+		const videoInput = document.getElementById("video_input");
+		const videoPreview = document.getElementById("video_preview");
+		
+		videoInput.addEventListener("change", function () {
+		    videoPreview.innerHTML = ""; // Clear previous previews
+		
+		    for (const file of this.files) {
+		        const videoElement = document.createElement("video");
+		        videoElement.src = URL.createObjectURL(file);
+		        videoElement.controls = true;
+		        videoPreview.appendChild(videoElement);
+		    }
+		});
 
-        videoInput.addEventListener("change", function () {
-            videoPreview.innerHTML = ""; // Clear previous previews
-
-            for (const file of this.files) {
-                const videoElement = document.createElement("video");
-                videoElement.src = URL.createObjectURL(file);
-                videoElement.controls = true;
-                videoPreview.appendChild(videoElement);
-            }
-        });
     </script>
 </body>
 </html>

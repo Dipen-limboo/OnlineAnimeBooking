@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anime Details</title>
+    <title>Add Event</title>
     <link rel="stylesheet" type="text/css" th:href="@{/CSS/main.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +24,7 @@
                         <iconify-icon id="active" class="iconify-icon" icon="lets-icons:video-light"  width="35" height="35"></iconify-icon>
                     </div>
                     <div class="head-content">
-                        <h2>Videos/<span>Anime Details </span></h2>
+                        <h2>Videos/<span>Add anime</span></h2>
                     </div>
                 </div>
                 <div class="admin_nav_profile">
@@ -57,7 +57,7 @@
                    
                 </div>
                 <div class="event-dropdown">
-                      <a th:href="@{/event}" >Create Event</a>
+                    <a th:href="@{/event}" >Create Event</a>
                     <a th:href="@{/view}">Event Details</a>
                     <a href="./cusotmer.html">Customers</a>
                     <a href="./viewStocks.html">Stocks</a>
@@ -74,8 +74,8 @@
                     
                 </div>
                 <div class="event-dropdown">
-                    <a th:href="@{/anime}">Add Anime</a>
-                    <a th:href="@{/viewAnime}" id="active">Anime Details</a>
+                    <a th:href="@{/anime}" id="active">Add Anime</a>
+                    <a th:href="@{/viewAnime}">Anime Details</a>
                     <a href="./animeReview.html">Reviews</a>
                 </div>
                 <div class="dashboard">
@@ -87,53 +87,73 @@
 
                 <!-- Fill the Form -->
 
-                <div class="event_form" >
-                    <h2>Anime Details</h2>
-                    <div class="eventClass_logo">
-                        <iconify-icon  class="eventClasslogo_log" icon="ri:movie-2-line"  width="20" height="20"></iconify-icon>
-                        <h2>Anmte</h2>
-                    </div>
-                    <div th:if="${#lists.isEmpty(animes)}" class="empty_event">
-                        <p>No any anime is uploaded.</p>
-                    </div>
-                    <div th:if="${not #lists.isEmpty(animes)}" class="event_table">
-                        <table>
-                            <tr>
-                                <th>Title</th>
-                                <th>Image</th>
-                                <th>Video</th>
-                                <th>Writer</th>
-                                <th>Category</th>
-                                <th>Action</th>
-                            </tr>
-                
-                            <tr th:each="anime: ${animes}">
-                                <td th:text="${anime.animeName}"></td>
-                                <td><img th:src="@{/images/{filename}(filename=${anime.animeImage})}" alt="Anime Image"></td>
-                                <td>
-									    <video  controls>
-									        <source th:src="@{/videos/{filename}(filename=${anime.animeVideo})}" type="video/mp4">
-									        Your browser does not support the video tag.
-									    </video>
-									</td>
-
-                                <td th:text="${anime.animeWriter}"></td>
-                                <td th:text="${anime.animeCategory}"></td>
-                                <td>
-                                    <div class="event_action" >
-                                        <a th:href="@{/anime/edit/{id}(id=${anime.id})}"><button type="submit">Edit</button></a>
-                                        <a th:href="@{/anime/{id}(id=${anime.id})}"><button type="submit">Delete</button></a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+                <form class="event_form" th:action="@{/event/{id}(id=${animes.id})}" th:object="${animes}" method="post"  enctype="multipart/form-data">
+				    <h2>Edit an Anime</h2>
+				    <div class="eventClass_logo">
+				        <iconify-icon  class="eventClasslogo_log" icon="ri:movie-2-line"  width="20" height="20"></iconify-icon>
+				        <h2>Anmte</h2>
+				    </div>
+				    <div class="event_form_content">
+				        <div class="content_left_side">
+				            <div class="form_div">
+				                <label>Title</label><br>
+				                <input type="text" name="anime_name" th:field="*{animeName}" placeholder="Title of Anime"> 
+				            </div>
+				            
+				            <div class="form_div">
+				                <label>Writer</label><br>
+				                <input type="text" name="writer_name" th:field="*{animeWriter}" placeholder="Writer Name"> 
+				            </div>
+				            <div class="form_div">
+				                <label>Category </label><br>
+				                <select name="anime_category" th:field="*{animeCategory}">
+				                    <option value="action">Action</option>
+				                    <option value="adventures">Adventures</option>
+				                    <option value="isekai">Isekai</option>
+				                    <option value="magic">Magic</option>
+				                    <option value="romance">Romance</option>
+				                    <option value="swords">Swords</option>
+				                </select>
+				
+				            </div>
+				            <div class="form_div">
+				                <label>Trailer</label><br>
+				                <input type="file" id="trailer_input" name="trailer" accept="video/*" multiple>
+				                <input type="hidden" th:field="*{animeTrailer}"/>
+				                <div id="trailer_preview" class="video-preview"></div>
+				            </div>
+				            
+				            <div class="form_div"> 
+				                <label>Story</label><br>
+				                <textarea rows="20" column="10" name="anime_story" th:field="*{animeStory}" placeholder="Write short story of Anime."></textarea>
+				            </div>
+				        </div>
+				        <div class="content_right_side">
+				            <div class="form_div">
+				                <label>Videos</label><br>
+				                <input type="file" id="video_input" name="video" accept="video/*" multiple>
+				                <input type="hidden" th:field="*{animeVideo}"/>
+				                <div id="video_preview" class="video-preview"></div>
+				            </div>
+				            <div class="form_div">
+				                <label>Anime Image</label><br>
+				                <input type="file" id="event_image" name="image" accept="image/*" style="width: 470px" required>
+				                    <input type="hidden" th:field="*{animeImage}" />
+				                 <img id="image_preview" th:if="${animes.animeImage}" th:src="${animes.animeImage}"alt="Anime Image Preview" style="height: 380px; width: 518px; display: none"> 
+				            </div>
+				            
+				            
+				            
+				        </div>
+				    </div>
+				    <div class="event_button_content">
+				        <button type="submit">Add</button>
+				    </div>
+				</form>
             </div>
         </div>
     </section>
     <script>
-
         var dropdown = document.getElementsByClassName("event");
         var i;
 
@@ -171,6 +191,36 @@
                 imagePreview.style.display = "none"; // Hide the image
             }
         });
+
+        //video logic
+        const trailerInput = document.getElementById("trailer_input");
+		const trailerPreview = document.getElementById("trailer_preview");
+		
+		trailerInput.addEventListener("change", function () {
+		    trailerPreview.innerHTML = ""; // Clear previous previews
+		
+		    for (const file of this.files) {
+		        const videoElement = document.createElement("video");
+		        videoElement.src = URL.createObjectURL(file);
+		        videoElement.controls = true;
+		        trailerPreview.appendChild(videoElement);
+		    }
+		});
+		
+		const videoInput = document.getElementById("video_input");
+		const videoPreview = document.getElementById("video_preview");
+		
+		videoInput.addEventListener("change", function () {
+		    videoPreview.innerHTML = ""; // Clear previous previews
+		
+		    for (const file of this.files) {
+		        const videoElement = document.createElement("video");
+		        videoElement.src = URL.createObjectURL(file);
+		        videoElement.controls = true;
+		        videoPreview.appendChild(videoElement);
+		    }
+		});
+
     </script>
 </body>
 </html>

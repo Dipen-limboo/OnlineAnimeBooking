@@ -388,6 +388,10 @@ body a{
   height: 20%;
 }
 
+.event_table table td video {
+  width: 100%;
+}
+
 .event_table table th{
     height: 40px;
 }
@@ -434,7 +438,7 @@ body a{
 }
 
 .video-preview video {
-    max-width: 100%;
+    max-width: 97%;
     height: auto;
 }
 

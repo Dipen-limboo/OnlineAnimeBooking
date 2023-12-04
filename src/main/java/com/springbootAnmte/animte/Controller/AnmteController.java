@@ -130,4 +130,34 @@ public class AnmteController {
 		model.addAttribute("animes", anmteService.getallAnime());
 		return "animeDetails";
 	}
+	
+	
+	@GetMapping("/videos/{filename}")
+	@ResponseBody
+	public ResponseEntity<Resource> serveVideo(@PathVariable String filename) {
+	    Resource file = anmteService.loadVideo(filename);
+	    return ResponseEntity.ok()
+	            .header(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=\"" + file.getFilename() + "\"")
+	            .body(file);
+	}
+	
+	@GetMapping("/trailer/{filename}")
+	@ResponseBody
+	public ResponseEntity<Resource> serveTrailer(@PathVariable String filename) {
+	    Resource file = anmteService.loadTrailer(filename);
+	    return ResponseEntity.ok()
+	            .header(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=\"" + file.getFilename() + "\"")
+	            .body(file);
+	}
+	
+	@GetMapping("/anime/edit/{id}")
+	public String editAnime(@PathVariable Long id, Model model) {
+		Anime anime = anmteService.getAnimeById(id);
+	    anime.setAnimeImage("/images/" + anime.getAnimeImage());
+	    anime.setAnimeTrailer("/trailer/" +anime.getAnimeTrailer());
+	    anime.setAnimeVideo("/videos/" +anime.getAnimeVideo());
+	    anime.setId(id);
+	    model.addAttribute("animes", anime);
+	    return "editAnime";
+	}
 }

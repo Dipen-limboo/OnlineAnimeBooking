@@ -24,7 +24,7 @@
                         <iconify-icon icon="material-symbols:event-list" style="color: #fc0000;" width="35" height="35"></iconify-icon>
                     </div>
                     <div class="head-content">
-                        <h2>Events/<span>Create Events</span></h2>
+                        <h2>Events/<span>...</span></h2>
                     </div>
                 </div>
                 <div class="admin_nav_profile">
@@ -40,7 +40,7 @@
         <div class="event_body">
             <div class="side_bar">
                 <span class="create_event">
-                    <a href="./CreateEvent.html"><button type="submit">+ New Event</button></a>
+                    <a th:href="@{/event}"><button type="submit">+ New Event</button></a>
                 </span>
                 <div class="dashboard" >
                     <iconify-icon class="iconify-icon" icon="solar:hamburger-menu-broken"  width="30" height="30"></iconify-icon>
@@ -57,7 +57,7 @@
                    
                 </div>
                 <div class="event-dropdown">
-                    <a th:href="@{/event}" id="active">Create Event</a>
+                    <a th:href="@{/event}" >Create Event</a>
                     <a th:href="@{/view}">Event Details</a>
                     <a href="./cusotmer.html">Customers</a>
                     <a href="./viewStocks.html">Stocks</a>

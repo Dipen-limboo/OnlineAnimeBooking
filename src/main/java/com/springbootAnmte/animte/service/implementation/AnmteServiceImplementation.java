@@ -165,5 +165,40 @@ public class AnmteServiceImplementation implements AnmteService{
 		return anp.findAll();
 	}
 
+	@Override
+	public Resource loadVideo(String filename) {
+		try {
+			Path path = videoRoot.resolve(filename);
+			Resource resource = new UrlResource(path.toUri());
+			if(resource.exists() || resource.isReadable()) {
+				return resource;
+			} else {
+				throw new RuntimeException("A file is not readable");
+			}
+		} catch (MalformedURLException e) {
+			throw new RuntimeException("Error: "+ e.getMessage());
+		}
+	}
+
+	@Override
+	public Resource loadTrailer(String filename) {
+		try {
+			Path path = trailerRoot.resolve(filename);
+			Resource resource = new UrlResource(path.toUri());
+			if(resource.exists() || resource.isReadable()) {
+				return resource;
+			} else {
+				throw new RuntimeException("A file is not readable");
+			}
+		} catch (MalformedURLException e) {
+			throw new RuntimeException("Error: "+ e.getMessage());
+		}
+	}
+
+	@Override
+	public Anime getAnimeById(Long id) {
+		return anp.findById(id).get();
+		}
+
 
 }

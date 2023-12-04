@@ -21,6 +21,9 @@ public interface AnmteService {
 	String saveVideo(MultipartFile video, Anime anime);
 	String saveTrailer(MultipartFile trailer, Anime anime);
 	Anime saveAnime(Anime anime);
-	List<Anime> getallAnime();;
+	List<Anime> getallAnime();
+	public Resource loadVideo(String filename);
+	public Resource loadTrailer(String filename);
+	Anime getAnimeById(Long id);
 	
 }
