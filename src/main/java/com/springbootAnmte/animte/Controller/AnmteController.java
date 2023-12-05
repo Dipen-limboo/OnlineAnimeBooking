@@ -153,11 +153,43 @@ public class AnmteController {
 	@GetMapping("/anime/edit/{id}")
 	public String editAnime(@PathVariable Long id, Model model) {
 		Anime anime = anmteService.getAnimeById(id);
+		
 	    anime.setAnimeImage("/images/" + anime.getAnimeImage());
+	    
 	    anime.setAnimeTrailer("/trailer/" +anime.getAnimeTrailer());
 	    anime.setAnimeVideo("/videos/" +anime.getAnimeVideo());
 	    anime.setId(id);
 	    model.addAttribute("animes", anime);
+	    System.out.println(anime.getAnimeImage());
 	    return "editAnime";
+	}
+	
+	@PostMapping("anime/{id}")
+	public String updateAnime(@PathVariable Long id, 
+			@ModelAttribute("anime") Anime anime, 
+			Model model,  
+			@RequestParam("image") MultipartFile image,
+			@RequestParam("video") MultipartFile video,
+			@RequestParam("trailer") MultipartFile trailer) {
+		String imageName = anmteService.saveAnime(image, anime);
+		String videoName = anmteService.saveVideo(video, anime);
+		String trailerName = anmteService.saveTrailer(trailer, anime);
+		Anime existingAnime = anmteService.getAnimeById(id);
+		existingAnime.setAnimeName(anime.getAnimeName());
+		existingAnime.setAnimeCategory(anime.getAnimeCategory());
+		existingAnime.setAnimeWriter(anime.getAnimeWriter());
+		existingAnime.setAnimeStory(anime.getAnimeStory());
+		existingAnime.setAnimeImage(imageName);
+		existingAnime.setAnimeVideo(videoName);
+		existingAnime.setAnimeTrailer(trailerName);
+		
+		anmteService.updateAnime(existingAnime);
+		return "redirect:/viewAnime";
+	}
+	
+	@GetMapping("anime/{id}")
+	public String deleteAnime(@PathVariable Long id) {
+		anmteService.deleteAnimeById(id);
+		return "redirect:/viewAnime";
 	}
 }

@@ -375,22 +375,24 @@ body a{
 .event_table table {
     min-width: 98%;
     background: var(--body-color);
+    border-collapse: collapse; 
+    border: 0.5px solid var(--body-color);
 }
 
 .event_table table th, td{ 
-    border: 1px solid var(--secondary-font-color);
+    /*border-bottom: 1px solid var(--secondary-font-color);
+    border-top: 1px solid var(--secondary-font-color);*/
     width: 16.33%;
     text-align: center;
+
 }
 
-.event_table table td img {
-  width: 100%;
-  height: 20%;
+.event_table table td img, video {
+  width: 85%;
+  padding-top:5px;
+
 }
 
-.event_table table td video {
-  width: 100%;
-}
 
 .event_table table th{
     height: 40px;
@@ -399,6 +401,7 @@ body a{
 .event_table tbody tr:nth-child(2n) {
   background-color: var(--primary-color);
 }
+
 
 .event_action {
     display: flex;
@@ -438,7 +441,7 @@ body a{
 }
 
 .video-preview video {
-    max-width: 97%;
+    width: 94%;
     height: auto;
 }
 

@@ -25,5 +25,7 @@ public interface AnmteService {
 	public Resource loadVideo(String filename);
 	public Resource loadTrailer(String filename);
 	Anime getAnimeById(Long id);
+	Anime updateAnime(Anime existingAnime);
+	void deleteAnimeById(Long id);	
 	
 }

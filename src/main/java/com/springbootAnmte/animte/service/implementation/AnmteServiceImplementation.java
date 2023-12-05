@@ -200,5 +200,15 @@ public class AnmteServiceImplementation implements AnmteService{
 		return anp.findById(id).get();
 		}
 
+	@Override
+	public Anime updateAnime(Anime existingAnime) {
+		return anp.save(existingAnime);
+	}
+
+	@Override
+	public void deleteAnimeById(Long id) {
+		anp.deleteById(id);
+	}
+
 
 }

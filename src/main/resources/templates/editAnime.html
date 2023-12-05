@@ -24,7 +24,7 @@
                         <iconify-icon id="active" class="iconify-icon" icon="lets-icons:video-light"  width="35" height="35"></iconify-icon>
                     </div>
                     <div class="head-content">
-                        <h2>Videos/<span>Add anime</span></h2>
+                        <h2>Videos/<span>...</span></h2>
                     </div>
                 </div>
                 <div class="admin_nav_profile">
@@ -74,7 +74,7 @@
                     
                 </div>
                 <div class="event-dropdown">
-                    <a th:href="@{/anime}" id="active">Add Anime</a>
+                    <a th:href="@{/anime}" >Add Anime</a>
                     <a th:href="@{/viewAnime}">Anime Details</a>
                     <a href="./animeReview.html">Reviews</a>
                 </div>
@@ -87,7 +87,7 @@
 
                 <!-- Fill the Form -->
 
-                <form class="event_form" th:action="@{/event/{id}(id=${animes.id})}" th:object="${animes}" method="post"  enctype="multipart/form-data">
+                <form class="event_form" th:action="@{/anime/{id}(id=${animes.id})}" th:object="${animes}" method="post"  enctype="multipart/form-data">
 				    <h2>Edit an Anime</h2>
 				    <div class="eventClass_logo">
 				        <iconify-icon  class="eventClasslogo_log" icon="ri:movie-2-line"  width="20" height="20"></iconify-icon>
@@ -120,12 +120,17 @@
 				                <label>Trailer</label><br>
 				                <input type="file" id="trailer_input" name="trailer" accept="video/*" multiple>
 				                <input type="hidden" th:field="*{animeTrailer}"/>
-				                <div id="trailer_preview" class="video-preview"></div>
+				                <div id="trailer_preview" class="video-preview">
+									<video width="518" height="380" controls>
+									    <source th:if="${animes.animeTrailer}" th:src="${animes.animeTrailer}" type="video/mp4">
+									    Your browser does not support the video tag.
+										</video>
+								</div>
 				            </div>
 				            
 				            <div class="form_div"> 
 				                <label>Story</label><br>
-				                <textarea rows="20" column="10" name="anime_story" th:field="*{animeStory}" placeholder="Write short story of Anime."></textarea>
+				                <textarea rows="10" column="10" name="anime_story" th:field="*{animeStory}" placeholder="Write short story of Anime."></textarea>
 				            </div>
 				        </div>
 				        <div class="content_right_side">
@@ -133,13 +138,19 @@
 				                <label>Videos</label><br>
 				                <input type="file" id="video_input" name="video" accept="video/*" multiple>
 				                <input type="hidden" th:field="*{animeVideo}"/>
-				                <div id="video_preview" class="video-preview"></div>
+				                <div id="video_preview" class="video-preview">
+									<video width="518" height="380" controls>
+									    <source th:if="${animes.animeVideo}" th:src="${animes.animeVideo}" type="video/mp4">
+									    Your browser does not support the video tag.
+										</video>
+
+								</div>
 				            </div>
 				            <div class="form_div">
 				                <label>Anime Image</label><br>
-				                <input type="file" id="event_image" name="image" accept="image/*" style="width: 470px" required>
+				                <input type="file" id="anime_image" name="image" accept="image/*" style="width: 470px" required>
 				                    <input type="hidden" th:field="*{animeImage}" />
-				                 <img id="image_preview" th:if="${animes.animeImage}" th:src="${animes.animeImage}"alt="Anime Image Preview" style="height: 380px; width: 518px; display: none"> 
+				                 <img id="anime_image_preview" th:if="${animes.animeImage}" th:src="${animes.animeImage}"alt="Anime Image Preview" style="height: 380px; width: 518px;"> 
 				            </div>
 				            
 				            
@@ -170,28 +181,27 @@
         }
 
         // image output or priview
-        const imageInput = document.getElementById("event_image");
-        const imagePreview = document.getElementById("image_preview");
-    
-        imageInput.addEventListener("change", function () {
-            const file = this.files[0];
-
-            if (file) {
-                const reader = new FileReader();
-
-                reader.onload = function (e) {
-                    imagePreview.src = e.target.result;
-                    imagePreview.style.display = "block"; // Display the image
-                };
-
-                reader.readAsDataURL(file);
-            } else {
-                // Clear the preview if no file is selected
-                imagePreview.src = "#";
-                imagePreview.style.display = "none"; // Hide the image
-            }
-        });
-
+       	const image = document.getElementById("anime_image");
+       	const preview = document.getElementById("anime_image_preview");
+       	
+       	image.addEventListener("change", function () {
+			   const file = this.files[0];
+			   
+			   if(file) {
+				   const read = new FileReader();
+				   
+				   read.onload = function (e) {
+					   preview.src = e.target.result;
+					   preview.style.display = "block";
+				   };
+				   read.readAsDataURL(file);
+			   }  else {
+				   preview.src = "#";
+				   preview.style.display="none";
+			   }
+		   });
+       	
+       	  
         //video logic
         const trailerInput = document.getElementById("trailer_input");
 		const trailerPreview = document.getElementById("trailer_preview");
