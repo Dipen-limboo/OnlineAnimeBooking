@@ -14,6 +14,7 @@ public interface AnmteService {
 	void deleteEventById(Long id);	
 	public Resource load(String filename);
 	String save(MultipartFile file, Event event);
+	List<Event> getTrendingEvents();
 	
 	
 	//anime;
@@ -26,6 +27,7 @@ public interface AnmteService {
 	public Resource loadTrailer(String filename);
 	Anime getAnimeById(Long id);
 	Anime updateAnime(Anime existingAnime);
-	void deleteAnimeById(Long id);	
+	void deleteAnimeById(Long id);
+		
 	
 }

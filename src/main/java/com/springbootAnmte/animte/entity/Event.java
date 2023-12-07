@@ -68,20 +68,21 @@ public class Event {
     @Column(name="ticket_price")
     @NotNull(message ="Price of ticket is required!!")
     private double ticketPrice;
+    
+    @Column(name="trending")
+    private boolean trending = false;
 
 	public Event() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	public Event(@NotBlank(message = "Event title is required!!") String eventTitle, LocalDate startDate,
 			LocalDate endDate, LocalTime startTime, LocalTime endTime,
 			@NotBlank(message = "Event location is required!!") String eventLocation,
 			@NotNull(message = "Enter the allocated tickets for event!!") long allocatedTickets,
-			@NotBlank(message = "Image is required!!") String eventImage,
-			@NotBlank(message = "Image location folder is required") String imageLocation, String eventDescription,
-			@NotNull(message = "Price of ticket is required!!") double ticketPrice) {
+			@NotBlank(message = "Image is required!!") String eventImage, String imageLocation, String eventDescription,
+			@NotNull(message = "Price of ticket is required!!") double ticketPrice, boolean trending) {
 		super();
 		this.eventTitle = eventTitle;
 		this.startDate = startDate;
@@ -94,8 +95,8 @@ public class Event {
 		this.imageLocation = imageLocation;
 		this.eventDescription = eventDescription;
 		this.ticketPrice = ticketPrice;
+		this.trending = trending;
 	}
-
 
 	public long getEventId() {
 		return eventId;
@@ -161,23 +162,20 @@ public class Event {
 		this.allocatedTickets = allocatedTickets;
 	}
 
-
-	public String getImageLocation() {
-		return imageLocation;
-	}
-
-
-	public void setImageLocation(String imageLocation) {
-		this.imageLocation = imageLocation;
-	}
-
-
 	public String getEventImage() {
 		return eventImage;
 	}
 
 	public void setEventImage(String eventImage) {
 		this.eventImage = eventImage;
+	}
+
+	public String getImageLocation() {
+		return imageLocation;
+	}
+
+	public void setImageLocation(String imageLocation) {
+		this.imageLocation = imageLocation;
 	}
 
 	public String getEventDescription() {
@@ -196,6 +194,15 @@ public class Event {
 		this.ticketPrice = ticketPrice;
 	}
 
+	public boolean isTrending() {
+		return trending;
+	}
+
+	public void setTrending(boolean trending) {
+		this.trending = trending;
+	}
+
+	
     
 }
 

@@ -210,5 +210,11 @@ public class AnmteServiceImplementation implements AnmteService{
 		anp.deleteById(id);
 	}
 
+	@Override
+	public List<Event> getTrendingEvents() {
+		// TODO Auto-generated method stub
+		return anmteRepository.findByTrending(Boolean.TRUE);
+	}
+
 
 }
