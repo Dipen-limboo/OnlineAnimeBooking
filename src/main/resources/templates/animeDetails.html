@@ -101,7 +101,6 @@
                             <tr>
                                 <th>Title</th>
                                 <th>Image</th>
-                                <th>Video</th>
                                 <th>Writer</th>
                                 <th>Category</th>
                                 <th>Action</th>
@@ -110,13 +109,6 @@
                             <tr th:each="anime: ${animes}">
                                 <td th:text="${anime.animeName}"></td>
                                 <td><img th:src="@{/images/{filename}(filename=${anime.animeImage})}" alt="Anime Image"></td>
-                                <td>
-									    <video  controls>
-									        <source th:src="@{/videos/{filename}(filename=${anime.animeVideo})}" type="video/mp4">
-									        Your browser does not support the video tag.
-									    </video>
-									</td>
-
                                 <td th:text="${anime.animeWriter}"></td>
                                 <td th:text="${anime.animeCategory}"></td>
                                 <td>

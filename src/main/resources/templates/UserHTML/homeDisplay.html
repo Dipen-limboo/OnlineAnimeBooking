@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <link rel="stylesheet" th:href="@{/CSS/style.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Quicksand:wght@600&family=Roboto+Serif:opsz@8..144&family=Roboto:ital,wght@1,300&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.cdnfonts.com/css/montreal" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+</head>
+<body>
+
+<div th:fragment ="home">
+	<section  class="home_page" id="home_page" th:style="'background-image: url('+
+@{/Images/Roronoa.jpg}+');'">
+    <div class="event-show-content" >
+        <div class="event-show-content-h2">
+            <h2 style="color: var(--font-color);letter-spacing: 1.5px;font-size: 36px;">WELCOME TO ANMATE</h2>
+            <div class="event-show-content-div">
+             <a th:href="@{/video}"><button>Watch Video</button></a>
+             <a th:href="@{/eventpanel}"><button>Events</button></a>
+            </div>  
+        </div>
+    </div>
+</section>
+<section id="trending-event" style="background-color: var(--font-color);">
+    <div class="current-event-container">
+        <div class="current-event-heading">
+            <h2>Trending Events</h2>
+        </div>
+        <div class="current-event-card" >
+		    <div class="card" th:each="eve: ${trending}" th:style="'background-image:url('+@{/images/{filename}(filename=${eve.eventImage})}+');'">
+		        <div class="card-contents">
+		            <div class="card-contents-head">
+		                <h5>Cosplay</h5>
+		                <h4 th:text="${eve.eventTitle}"></h4>
+		            </div>
+		            <div class="card-contents-button">
+                    <a th:href="@{/ticket/evsd{evId}(evId =${eve.eventId})}"><button type="submit">Get-Ticket</button></a>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+    </div>
+</section>
+<section id="trending-event">
+    <div class="current-event-container">
+        <div class="current-event-heading">
+            <h2>Trending Anime</h2>
+        </div>
+        <div class="current-event-card">
+            <div class="card"th:each="eve: ${animes}" th:style="'background-image:url('+@{/images/{filename}(filename=${eve.animeImage})}+');'">
+                <div class="card-contents">
+                    <div class="card-contents-head">
+                    <h5>[[${eve.animeCategory}]]</h5>
+                    <h4>[[${eve.animeName}]]</h4>
+                    </div>              
+                    <div class="card-contents-button">
+                    <a th:href="@{/video/linksbs{id}(id=${eve.Id})}"><button>Watch Video</button></a>
+                    </div>       
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+      
+</div>
+
+</body>
+</html>

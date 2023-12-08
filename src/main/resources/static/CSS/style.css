@@ -8,7 +8,7 @@
     --primary-color: #000000;
     --secondary-color: #C11119;
     --font-color: #ffffff;
-    --secondary-font-color:#555555;
+    --secondary-font-color:#111111;
     --body-color: #EDEBEB;
     --sub-heading-color: #2B3378;
     --other: #D9D9D9;
@@ -68,6 +68,38 @@ body a{
     font-family: 'Montreal', sans-serif; 
 }
 
+
+#home_page {
+    height: 91vh;
+    background-position: center;
+    background-size: cover;
+}
+.event-show-content-div {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.event-show-content-div button {
+	height: 41px;
+    width: 139px;
+    margin-top: 15px;
+    font-size: 18px;
+    color: white;
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    border: none;
+    margin-right: 10px;
+}
+
+.event-show-content-div button:hover{
+	background-color: var(--font-color);
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    transition: 0.5s ease-out;
+}
+
 .user_content ul {
     display: flex;
     flex-direction: row;
@@ -99,11 +131,11 @@ body a{
 .user-container {
     display: flex;
     flex-direction: column;
-    height: 43rem;
+    height: 91vh;
 }
 
 .user-content-body{
-    height: 43rem;
+    height: 91vh;
     display: none;
     background-position: center;
  	background-size: cover;
@@ -142,7 +174,7 @@ body a{
   border-radius: 10px;
   opacity: 100%;
   position: absolute;
-  top: 64%;
+  top: 66%;
 }
 
 
@@ -432,3 +464,264 @@ footer .logo_content a{
     font-size: 14px;
 }
 
+
+
+#event_show {
+  background: var(--primary-color);
+  width: 100%;
+  height: 75vh;
+  color: var(--font-color);
+  background-position: center;
+  background-size: cover;
+}
+
+
+
+.event-show-content {
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+    width: 418px;
+    padding-top: 240px;
+    padding-left: 578px;
+}
+
+.just-div {
+    height: 120px;
+    background-color: var(--primary-color);
+    width: 25rem;
+    opacity: 90%;
+    border-radius: 10px;
+}
+
+.event-show-content-h2 {
+    text-align: center;
+    position: absolute;
+    top: 45%;
+    left: 38%;
+}
+
+.event-show-content-h2 h3 {
+  font-size: 16px;
+  padding: 11px;
+  color: var(--secondary-color);
+  letter-spacing: 1px;
+}
+
+
+.booking-body-top-content span {
+  color: var(--sub-heading-color);
+  font-style: italic;
+}
+
+
+#event-booking {
+    min-height: 100vh;
+    color: var(--secondary-font-color);
+}
+
+.booking-div {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    height: 720px;
+    padding-bottom: 64px;
+}
+
+.booking-heading {
+    text-align: center;
+    padding-top: 55px;
+    letter-spacing: 1px;
+    font-size: 22px;
+}
+
+.booking-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 65px;
+}
+
+.booking-body-image {
+    height: 545px;
+    background: var(--body-color);
+    width: 500px;
+    border-radius: 10px;
+    margin-left: 171px;
+    background-position: center;
+    background-size: cover;
+}
+
+
+.booking-body-content{
+    margin-right: 11rem;
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+}
+
+.booking-body-top-content h3 {
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: var(--secondary-font-color);
+}
+
+.booking-body-top-content p {
+    padding: 10px 0;
+}
+
+.booking-body-bottom-content {
+    padding-top: 10px;
+  }
+
+#tickets {
+    margin: 20px 0 10px 0;
+    height: 24px;
+    width: 250px;
+    text-align: center;
+}
+
+.booking-body-bottom-content form button{
+    height: 41px;
+    width: 139px;
+    margin-top: 15px;
+    font-size: 18px;
+    color: white;
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    border: none;
+}
+
+
+.booking-body-bottom-content form button:hover{
+    background-color: var(--font-color);
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    transition: 0.5s ease-out;
+}
+
+
+.content-details-tailer {
+    display: flex;
+    flex-direction: column;
+    padding: 7px 7px 21px 29px;
+    letter-spacing: 1px;
+    background: var(--primary-color);
+    width: 450px;
+    height: 200px;
+    opacity: 100%;
+    position: absolute;
+    top: 66%;
+    left: 65%;
+    border-radius: 10px;
+    color:var(--font-color)
+}
+
+.content-details-trailer-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.content-details-image {
+    height: 150px;
+    width: 200px;
+    margin-top: 10px;
+    border: 2px solid var(--font-color);
+    border-radius: 10px;
+    margin-right: 25px;
+    background-position: center;
+    background-size: cover;
+}
+
+
+#anime_show {
+    background: var(--primary-color);
+    width: 100%;
+    min-height: 81vh;
+    color: var(--font-color);
+    background-position: center;
+    background-size:cover;
+}
+
+ #anime_show .video {
+  height: 81vh;
+  width: 100%;
+  padding: 10px;
+}
+.watch-video-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.anime-head-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 69px;
+    padding-bottom: 20px;
+}
+
+.anime-head-title-heading {
+    margin-left: 169px;
+    display: flex;
+    flex-direction: column;
+    width: 79%;
+	letter-spacing: 1.5px;
+}
+
+.anime-head-title-heading h2 {
+    font-size: 25px;
+}
+
+.anime-head-title-heading h3 {
+    font-size: 16px;
+    color: var(--secondary-font-color);
+}
+
+.anime-head-button button{
+    height: 41px;
+    width: 139px;
+    margin-top: 8px;
+    font-size: 18px;
+    color: white;
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    border: none;
+}
+
+.anime-head-button button:hover{
+    background-color: var(--font-color);
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    transition: 0.5s ease-out;
+}
+
+.anime-head-button {
+    margin-right: 169px;
+}
+
+.anime-body-image-trailer {
+    height: 580px;
+    width: 79%;
+    margin-left: 164px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.anime-body-image {
+    height: 530px;
+    width: 500px;
+    background: black;
+    border-radius: 10px;
+    background-position: center;
+  	background-size: cover;
+}
+
+.anime-body-trailer video {
+    height: 530px;
+    width: 690px;
+    background: black;
+    border-radius: 10px;
+}

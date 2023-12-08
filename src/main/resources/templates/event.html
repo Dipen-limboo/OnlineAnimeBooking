@@ -12,32 +12,9 @@
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </head>
 <body>
-<header>
-    <nav class="user_navbar">
-        <div class="logo">
-            <div ><iconify-icon  class="logo_log" icon="ri:movie-2-line"  width="50" height="50"></iconify-icon></div>
-            <div class="logo_content"><a th:href="@{/home}">Anmte</a></div>
-        </div>
-        <div class="user_content">
-            <ul>
-                <li><a th:href="@{/home}">Home</a></li>
-                <li><a th:href="@{/eventpanel}">Event</a></li>
-                <li><a href="#current-event">Current Event</a></li>
-                <li><a href="#trending-event">Trending Event</a></li>
-            </ul>
-        </div>
-
-        <div class="user_nav_profile">
-            <div class="search">
-                <iconify-icon icon="ion:search" style="color: white;" width="35" height="35"></iconify-icon>
-            </div> 
-            <div class="profile_icon">
-                <iconify-icon icon="mdi:user-outline" style="color: white;" width="40" height="40"></iconify-icon> 
-            </div>
-        </div>
-    </nav>
+<header th:replace="Fragment/header :: header">
 </header>
-<section class="home_page" id="home_page"></section>
+<section class="home_page" id="home_page">
     <div class="user-container">
         <div class="user-content-body fade" th:objects="${event}" th:style="'background-image:url('+@{/images/{filename}(filename=${event.eventImage})}+');'">
             <div class="user-content-body-top">
@@ -50,7 +27,7 @@
                     <h3>Date: [[${event.startDate}]] </h3>
                     <h3>Time: [[${event.startTime}]]</h3>
                     <h3>Location: [[${event.eventLocation}]] </h3>
-                    <a href="#"><button>Get-Ticket</button></a>
+                    <a th:href="@{/ticket/evsd{evId}(evId =${event.eventId})}"><button type="submit">Get-Ticket</button></a>
                 </div>
             </div>    
         </div>
@@ -66,7 +43,7 @@
                     <h3>Date: [[${event2.startDate}]] </h3>
                     <h3>Time: [[${event2.startTime}]]</h3>
                     <h3>Location: [[${event2.eventLocation}]] </h3>
-                    <a href="#"><button>Get-Ticket</button></a>
+                    <a th:href="@{/ticket/evsd{evId}(evId =${event2.eventId})}"><button type="submit">Get-Ticket</button></a>
                 </div>
              </div>        
         </div>
@@ -85,7 +62,7 @@
 		                <h4 th:text="${eve.eventTitle}"></h4>
 		            </div>
 		            <div class="card-contents-button">
-		                <a href="#"><button>Get-Ticket</button></a>
+                    <a th:href="@{/ticket/evsd{evId}(evId =${eve.eventId})}"><button type="submit">Get-Ticket</button></a>
 		            </div>
 		        </div>
 		    </div>
@@ -105,71 +82,15 @@
 		                <h4 th:text="${eve.eventTitle}"></h4>
 		            </div>
 		            <div class="card-contents-button">
-		                <a href="#"><button>Get-Ticket</button></a>
+                    <a th:href="@{/ticket/evsd{evId}(evId =${eve.eventId})}"><button type="submit">Get-Ticket</button></a>
 		            </div>
 		        </div>
 		    </div>
 		</div>
     </div>
 </section>
-<footer>
-    <div class="footer-nav">
-        <div class="footer-logo">
-            <div >
-                <iconify-icon  class="logo-log" icon="ri:movie-2-line"  width="30" height="30"></iconify-icon>
-            </div>
-            <div class="logo_content">
-                <a href="./home.html">Anmte</a>
-            </div>
-        </div>
-    </div>
-    <div class="footer-body">
-        <div class="footer-description">
-            <h2>Buy anime tickets easily with Anmte system inside the country, Nepal. You can also watch the anime videos here. <br><br> So, Support our webiste. You can contact us from the below mail.  </h2>
-            <div class="footer-description-email">
-                <p>Email: <span>anmte23@email.com</span>
-                    <div class="message"> <a href="mailto:anmte23@gmail.com">Send Email</a></div>
-                    </p>
-            </div>
-        </div>
-        <div class="footer-category">
-            <div class="footer-category-head">
-                <h3>Event</h3>               
-            </div>
-            <div class="footer-category-body">
-                <ul>
-                    <li><a href="#current-event">Current Event</a></li>
-                    <li><a href="#trending-event">Trending Event</a></li>
-                </ul>
-            </div>  
-         </div>    
-        <div class="footer-category">
-            <div class="footer-category-head">
-                <h3>Anime Category</h3>               
-            </div>
-            <div class="footer-category-body">
-                <ul>
-                    <li><a href="">Action</a></li>
-                    <li><a href="">Adventures</a></li>
-                    <li><a href="">Isekai</a></li>
-                    <li><a href="">Magic</a></li>
-                    <li><a href="">Romance</a></li>
-                    <li><a href="">Sword</a></li>
-                </ul>
-            </div>           
-        </div>
-        <div class="footer-icon">
-            <h3>Social Links</h3>
-            <ul>
-                <li><a href="#"><iconify-icon icon="formkit:facebook"></iconify-icon></a></li>
-                <li><a href="#"><iconify-icon icon="fa6-brands:instagram"></iconify-icon></a></li>
-                <li><a href="#"><iconify-icon icon="devicon-plain:linkedin"></iconify-icon></a></li>
-            </ul>
-            </div>
-    </div>
-    <div class="footer-copyright">
-            <h3>@CopyRight 2023 By Anmte</h3>
-    </div>
+<footer th:replace="Fragment/footer :: footer">
+   
 </footer>
 <script>
     document.addEventListener("DOMContentLoaded", function () {

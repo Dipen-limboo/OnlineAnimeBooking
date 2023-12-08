@@ -118,8 +118,8 @@
 				            </div>
 				            <div class="form_div">
 				                <label>Trailer</label><br>
-				                <input type="file" id="trailer_input" name="trailer" accept="video/*" multiple>
-				                <input type="hidden" th:field="*{animeTrailer}"/>
+				                <input type="file" id="trailer_input" name="trailer" accept="video/*" multiple> 
+				                <input type="hidden" th:field="*{animeTrailer}"/> 
 				                <div id="trailer_preview" class="video-preview">
 									<video width="518" height="380" controls>
 									    <source th:if="${animes.animeTrailer}" th:src="${animes.animeTrailer}" type="video/mp4">
