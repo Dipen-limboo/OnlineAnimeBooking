@@ -31,12 +31,35 @@
             <div class="search">
                 <iconify-icon icon="ion:search" style="color: white;" width="35" height="35"></iconify-icon>
             </div> 
-            <div class="profile_icon">
-                <iconify-icon icon="mdi:user-outline" style="color: white;" width="40" height="40"></iconify-icon> 
-            </div>
+            <div class="profile_icon" id="profileIcon">
+			    <div class="icon-container">
+			        <iconify-icon class="iconify-person" icon="mdi:user-outline" style="color: white;" width="40" height="40"></iconify-icon>
+			        <ul class="dropdown">
+			            <li><a href="#">Profile</a></li>
+			            <li><form th:action="@{/logout}" method="post">
+							<button type="submit">Logout</button>
+						</form></li>
+			        </ul>
+			    </div>
+			</div>
         </div>
     </nav>
 </header>
-      
+ <script>
+		document.addEventListener('click', function (event) {
+		    var profileIcon = document.getElementById('profileIcon');
+		    var dropdown = profileIcon.querySelector('.dropdown');
+		
+		    if (!profileIcon.contains(event.target)) {
+		        dropdown.style.visibility = 'hidden';
+		    }
+		});
+		
+		// Prevent default click action on the icon
+		var iconContainer = document.querySelector('.icon-container');
+		iconContainer.addEventListener('click', function (event) {
+		    event.preventDefault();
+		});
+ </script>     
 </body>
 </html>

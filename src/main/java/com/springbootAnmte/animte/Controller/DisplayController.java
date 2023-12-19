@@ -3,6 +3,7 @@ package com.springbootAnmte.animte.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -67,11 +68,12 @@ public class DisplayController {
 		return "video";
 	}
 	
+	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/video/linksbs{id}")
 	public String linkVideo(@PathVariable Long id, Model model) {
-		Anime anime = anmteService.getAnimeById(id);
-		model.addAttribute("anime", anime);
-		return "animeShow";
+	    Anime anime = anmteService.getAnimeById(id);
+	    model.addAttribute("anime", anime);
+	    return "animeShow";
 	}
 	
 	

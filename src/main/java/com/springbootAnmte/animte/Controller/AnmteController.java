@@ -92,7 +92,7 @@ public class AnmteController {
 	@ResponseBody
 	public ResponseEntity<Resource> serveImage(@PathVariable String filename) {
 	    Resource file = anmteService.load(filename);
-	    System.out.println("Loaded File: " + file.getFilename());
+	    
 	    return ResponseEntity.ok()
 	            .header(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=\"" + file.getFilename() + "\"")
 	            .body(file);

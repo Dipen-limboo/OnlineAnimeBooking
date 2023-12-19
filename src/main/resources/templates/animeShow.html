@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +12,12 @@
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </head>
 <body>
+
+  
+    
 <header th:replace="Fragment/header :: header">
 </header>
+<div sec:authorize='hasAuthority("USER")'>
 <section id="anime_show" th:object="${anime}">
    <video class="video" controls>
 	    <source th:src="@{/trailer/{filename}(filename=${anime.animeTrailer})}" type="video/mp4">
@@ -24,8 +28,8 @@
     <div class="watch-video-div">
         <div class="anime-head-title">
             <div class="anime-head-title-heading">
-                <h2>[[${anime.animeName}]]</h2>
-                <h3 style="color: black;">[[${anime.animeCategory}]]</h3>
+                <h2 th:text="${anime.animeName}"></h2>
+                <h3 style="color: black;" th:text="${anime.animeCategory}"></h3>
             </div>
             <div class="anime-head-button">
                 <a href="#anime_show"><button>Watch Video</button></a>
@@ -42,13 +46,15 @@
         </div>
         <div class="anime-head-title-heading" style="margin-bottom: 50px;">
             <h2>Story</h2>
-            <h3>[[${anime.animeStory}]]</h3>
+            <h3 th:text="${anime.animeStory}"></h3>
         </div>
     </div>
 </section>  
 <footer th:replace="Fragment/footer :: footer">
    
-</footer> 
+</footer>
+ </div>
+
 <script>
     document.getElementById("tickets").defaultValue = "1";
 </script>
