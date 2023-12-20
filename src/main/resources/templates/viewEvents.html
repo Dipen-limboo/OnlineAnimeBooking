@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Event</title>
+    <title>View Event</title>
     <link rel="stylesheet" type="text/css" th:href="@{/CSS/main.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,14 +27,7 @@
                         <h2>Events/<span>Event Details</span></h2>
                     </div>
                 </div>
-                <div class="admin_nav_profile">
-                    <div class="search">
-                        <iconify-icon icon="ion:search" style="color: black;" width="35" height="35"></iconify-icon>
-                    </div> 
-                    <div class="profile_icon">
-                        <iconify-icon icon="mdi:user-outline" style="color: black;" width="40" height="40"></iconify-icon> 
-                    </div>
-                </div>
+                <div th:replace="Fragment/adminheader :: adminheader"></div>
             </nav>
         </header>
         <div class="event_body">
@@ -58,7 +51,7 @@
                 </div>
                 <div class="event-dropdown">
                     <a th:href="@{/event}">Create Event</a>
-                    <a href="./viewEvent.html" id="active" >Event Details</a>
+                    <a th:href="@{/view}">Event Details</a>
                     <a href="./cusotmer.html">Customers</a>
                     <a href="./viewStocks.html">Stocks</a>
                     <a href="./viewReview,html">Reviews</a>
@@ -80,7 +73,7 @@
                 </div>
                 <div class="dashboard">
                 <iconify-icon class="iconify-icon" icon="heroicons:users"  width="28" height="30"></iconify-icon>
-                <a href="./users.html">Users</a>
+                <a th:href="@{/users}">Users</a>
                 </div>
             </div>
             <div class="event_content">

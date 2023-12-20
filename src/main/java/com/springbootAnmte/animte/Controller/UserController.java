@@ -1,7 +1,10 @@
 package com.springbootAnmte.animte.Controller;
 
+import java.util.Collection;
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -60,5 +63,17 @@ public class UserController {
 		return "userPanel";
 	}
 	
+	@GetMapping("/successHandler")
+	public String successHandler(Authentication auth, Model model ) {
+		Collection <? extends GrantedAuthority > authorities = auth.getAuthorities();
+		
+		if(authorities.stream().anyMatch(autho -> autho.getAuthority().equals("ADMIN"))) {
+			return "redirect:/event";
+		} else if(authorities.stream().anyMatch(autho->autho.getAuthority().equals("USER"))){
+			return "redirect:/home";
+		} else {
+			return "/login";
+		}
+	}
 	
 }

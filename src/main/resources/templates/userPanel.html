@@ -2,29 +2,112 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Registration and Login System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View User</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/main.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Quicksand:wght@600&family=Roboto+Serif:opsz@8..144&family=Roboto:ital,wght@1,300&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.cdnfonts.com/css/montreal" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </head>
 <body>
-	<header th:replace="Fragment/header :: header">
-	</header>
-    <div class="container">
-        <h2>List of Registered Users</h2>
-        <table>
-            <tr>
-                <th>User Name</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Password</th>
-            </tr>
-            <tr th:each="user : ${userList}">
-                <td th:text="${user.username}"></td>
-                <td th:text="${user.phone}"></td>
-                <td th:text="${user.email}"></td>
-                <td th:text="${user.password}"></td>
-            </tr>
-        </table>
-    </div>
-    <footer th:replace="Fragment/footer :: footer">
-	</footer>
+   <section class="event_section">
+	<header th:fragment="adminheader">
+        <nav class="Admin_navbar">
+            <div class="logo">
+                <div ><iconify-icon  class="logo_log" icon="ri:movie-2-line"  width="50" height="50"></iconify-icon></div>
+                <div class="logo_content"><a href="./dashboard.html">Anmte</a></div>
+            </div>
+            <div class="admin_nav_content">
+                <div class="icon">
+                    <iconify-icon id="active" class="iconify-icon" icon="heroicons:users"  width="35" height="35"></iconify-icon>
+                </div>
+                <div class="head-content">
+                    <h2>Users/<span>Add anime</span></h2>
+                </div>
+            </div>
+            <div th:replace="Fragment/adminheader :: adminheader"></div>
+        </nav>
+    </header>
+	<div class="event_body">
+            <div class="side_bar">
+                <span class="create_event">
+                    <a th:href="@{/event}"><button type="submit">+ New Event</button></a>
+                </span>
+                <div class="dashboard" >
+                    <iconify-icon class="iconify-icon" icon="solar:hamburger-menu-broken"  width="30" height="30"></iconify-icon>
+                    <a href="./dashboard.html">Dashboard</a>
+                </div>
+                <div class="event">
+                    <div class="event_div1">
+                        <iconify-icon id="active" class="iconify-icon"  icon="material-symbols:event-list"  width="27" height="30"></iconify-icon>
+                        <div class="event-log">
+                            <h2 >Events</h2>
+                            <iconify-icon  class="iconify-icon" icon="solar:alt-arrow-down-linear"  width="25" height="25"></iconify-icon>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="event-dropdown">
+                    <a th:href="@{/event}">Create Event</a>
+                    <a th:href="@{/view}">Event Details</a>
+                    <a href="./cusotmer.html">Customers</a>
+                    <a href="./viewStocks.html">Stocks</a>
+                    <a href="./viewReview,html">Reviews</a>
+                </div>
+                <div class="event">
+                    <div class="event_div1">
+                        <iconify-icon  class="iconify-icon" icon="lets-icons:video-light"  width="30" height="30"></iconify-icon>
+                        <div class="event-log">
+                            <h2 >Videos</h2>
+                            <iconify-icon class="iconify-icon" icon="solar:alt-arrow-down-linear"  width="25" height="25"></iconify-icon>
+                        </div>    
+                    </div>
+                    
+                </div>
+                <div class="event-dropdown">
+                    <a th:href="@{/anime}">Add Anime</a>
+                    <a th:href="@{/viewAnime}">Anime Details</a>
+                    <a href="./animeReview.html">Reviews</a>
+                </div>
+                <div class="dashboard">
+                <iconify-icon id="active" class="iconify-icon" icon="heroicons:users"  width="28" height="30"></iconify-icon>
+                <a th:href="@{/users}" id="active">Users</a>
+                </div>
+            </div>
+            <div class="event_content">
+
+                <!-- Fill the Form -->
+
+                <div class="event_form" >
+                    <h2>User Details</h2>
+                    <div class="eventClass_logo">
+                        <iconify-icon  class="eventClasslogo_log" icon="ri:movie-2-line"  width="20" height="20"></iconify-icon>
+                        <h2>Anmte</h2>
+                    </div>
+                    <div th:if="${#lists.isEmpty(userList)}" class="empty_event">
+                        <p>No Users available.</p>
+                    </div>
+                    <div th:if="${not #lists.isEmpty(userList)}" class="event_table">
+		    		    <table>
+				            <tr>
+				                <th>User Name</th>
+				                <th>Phone</th>
+				                <th>Email</th>
+				                <th>Password</th>
+				            </tr>
+				            <tr th:each="user : ${userList}">
+				                <td th:text="${user.username}"></td>
+				                <td th:text="${user.phone}"></td>
+				                <td th:text="${user.email}"></td>
+				                <td th:text="${user.password}"></td>
+				            </tr>
+				        </table>
+			    	</div>
+				</div>
+				</div>
+		</div>
+</section>
 </body>
 </html>

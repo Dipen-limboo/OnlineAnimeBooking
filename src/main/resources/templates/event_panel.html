@@ -27,14 +27,7 @@
                         <h2>Events/<span>Create Events</span></h2>
                     </div>
                 </div>
-                <div class="admin_nav_profile">
-                    <div class="search">
-                        <iconify-icon icon="ion:search" style="color: black;" width="35" height="35"></iconify-icon>
-                    </div> 
-                    <div class="profile_icon">
-                        <iconify-icon icon="mdi:user-outline" style="color: black;" width="40" height="40"></iconify-icon> 
-                    </div>
-                </div>
+                <div th:replace="Fragment/adminheader :: adminheader"></div>
             </nav>
         </header>
         <div class="event_body">
@@ -80,7 +73,7 @@
                 </div>
                 <div class="dashboard">
                 <iconify-icon class="iconify-icon" icon="heroicons:users"  width="28" height="30"></iconify-icon>
-                <a href="./users.html">Users</a>
+                <a th:href="@{/users}">Users</a>
                 </div>
             </div>
             <div class="event_content">

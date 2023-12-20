@@ -41,8 +41,6 @@ public class UserConfiguration {
 	
 
 	
-	
-	
 	@Bean
 	public static PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -64,7 +62,7 @@ public class UserConfiguration {
 							form -> form
 									.loginPage("/login")
 									.loginProcessingUrl("/login")
-									.defaultSuccessUrl("/home")
+									.defaultSuccessUrl("/successHandler")
 										
 									.permitAll()
 									).logout(

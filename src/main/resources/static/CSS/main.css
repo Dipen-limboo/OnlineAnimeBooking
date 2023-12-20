@@ -448,3 +448,45 @@ body a{
 .form_div input[type=file] {
     font-size:16px;
 }
+
+.icon-container:hover .dropdown {
+    visibility: visible;
+}
+
+.dropdown {
+    position: absolute;
+    right: 3%;
+    top: 8%;
+    list-style: none;
+    text-align: center;
+    visibility: hidden;
+}
+
+
+.dropdown li {
+	padding: 10px;
+}
+
+
+.dropdown li a:hover{
+	color: var(--secondary-color);
+	margin-right:4px;
+	transition: 0.5s ease;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.dropdown li form button {
+  border: none;
+  background-color: var(--primary-color);
+  color: var(--font-color);
+  font-size: 18px;
+}
+
+.dropdown li form button:hover{
+	color: var(--secondary-color);
+	margin-right:4px;
+	transition: 0.5s ease;
+	font-size: 20px;
+	cursor: pointer;
+} 
