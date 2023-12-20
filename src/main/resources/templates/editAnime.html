@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Event</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/main.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Quicksand:wght@600&family=Roboto+Serif:opsz@8..144&family=Roboto:ital,wght@1,300&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.cdnfonts.com/css/montreal" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+</head>
+<body>
+    <section class="event_section">
+        <header>
+            <nav class="Admin_navbar">
+                <div class="logo">
+                    <div ><iconify-icon  class="logo_log" icon="ri:movie-2-line"  width="50" height="50"></iconify-icon></div>
+                    <div class="logo_content"><a href="./dashboard.html">Anmte</a></div>
+                </div>
+                <div class="admin_nav_content">
+                    <div class="icon">
+                        <iconify-icon id="active" class="iconify-icon" icon="lets-icons:video-light"  width="35" height="35"></iconify-icon>
+                    </div>
+                    <div class="head-content">
+                        <h2>Videos/<span>...</span></h2>
+                    </div>
+                </div>
+                <div class="admin_nav_profile">
+                    <div class="search">
+                        <iconify-icon icon="ion:search" style="color: black;" width="35" height="35"></iconify-icon>
+                    </div> 
+                    <div class="profile_icon">
+                        <iconify-icon icon="mdi:user-outline" style="color: black;" width="40" height="40"></iconify-icon> 
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="event_body">
+            <div class="side_bar">
+                <span class="create_event">
+                    <a th:href="@{/event}"><button type="submit">+ New Event</button></a>
+                </span>
+                <div class="dashboard" >
+                    <iconify-icon class="iconify-icon" icon="solar:hamburger-menu-broken"  width="30" height="30"></iconify-icon>
+                    <a href="./dashboard.html">Dashboard</a>
+                </div>
+                <div class="event">
+                    <div class="event_div1">
+                        <iconify-icon  class="iconify-icon"  icon="material-symbols:event-list"  width="27" height="30"></iconify-icon>
+                        <div class="event-log">
+                            <h2 >Events</h2>
+                            <iconify-icon class="iconify-icon" icon="solar:alt-arrow-down-linear"  width="25" height="25"></iconify-icon>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="event-dropdown">
+                    <a th:href="@{/event}" >Create Event</a>
+                    <a th:href="@{/view}">Event Details</a>
+                    <a href="./cusotmer.html">Customers</a>
+                    <a href="./viewStocks.html">Stocks</a>
+                    <a href="./viewReview,html">Reviews</a>
+                </div>
+                <div class="event">
+                    <div class="event_div1">
+                        <iconify-icon id="active" class="iconify-icon" icon="lets-icons:video-light"  width="30" height="30"></iconify-icon>
+                        <div class="event-log">
+                            <h2 id="active">Videos</h2>
+                            <iconify-icon  id="active"  class="iconify-icon" icon="solar:alt-arrow-down-linear"  width="25" height="25"></iconify-icon>
+                        </div>    
+                    </div>
+                    
+                </div>
+                <div class="event-dropdown">
+                    <a th:href="@{/anime}" >Add Anime</a>
+                    <a th:href="@{/viewAnime}">Anime Details</a>
+                    <a href="./animeReview.html">Reviews</a>
+                </div>
+                <div class="dashboard">
+                <iconify-icon class="iconify-icon" icon="heroicons:users"  width="28" height="30"></iconify-icon>
+                <a href="./users.html">Users</a>
+                </div>
+            </div>
+            <div class="event_content">
+
+                <!-- Fill the Form -->
+
+                <form class="event_form" th:action="@{/anime/{id}(id=${animes.id})}" th:object="${animes}" method="post"  enctype="multipart/form-data">
+				    <h2>Edit an Anime</h2>
+				    <div class="eventClass_logo">
+				        <iconify-icon  class="eventClasslogo_log" icon="ri:movie-2-line"  width="20" height="20"></iconify-icon>
+				        <h2>Anmte</h2>
+				    </div>
+				    <div class="event_form_content">
+				        <div class="content_left_side">
+				            <div class="form_div">
+				                <label>Title</label><br>
+				                <input type="text" name="anime_name" th:field="*{animeName}" placeholder="Title of Anime"> 
+				            </div>
+				            
+				            <div class="form_div">
+				                <label>Writer</label><br>
+				                <input type="text" name="writer_name" th:field="*{animeWriter}" placeholder="Writer Name"> 
+				            </div>
+				            <div class="form_div">
+				                <label>Category </label><br>
+				                <select name="anime_category" th:field="*{animeCategory}">
+				                    <option value="action">Action</option>
+				                    <option value="adventures">Adventures</option>
+				                    <option value="isekai">Isekai</option>
+				                    <option value="magic">Magic</option>
+				                    <option value="romance">Romance</option>
+				                    <option value="swords">Swords</option>
+				                </select>
+				
+				            </div>
+				            <div class="form_div">
+				                <label>Trailer</label><br>
+				                <input type="file" id="trailer_input" name="trailer" accept="video/*" multiple> 
+				                <input type="hidden" th:field="*{animeTrailer}"/> 
+				                <div id="trailer_preview" class="video-preview">
+									<video width="518" height="380" controls>
+									    <source th:if="${animes.animeTrailer}" th:src="${animes.animeTrailer}" type="video/mp4">
+									    Your browser does not support the video tag.
+										</video>
+								</div>
+				            </div>
+				            
+				            <div class="form_div"> 
+				                <label>Story</label><br>
+				                <textarea rows="10" column="10" name="anime_story" th:field="*{animeStory}" placeholder="Write short story of Anime."></textarea>
+				            </div>
+				        </div>
+				        <div class="content_right_side">
+				            <div class="form_div">
+				                <label>Videos</label><br>
+				                <input type="file" id="video_input" name="video" accept="video/*" multiple>
+				                <input type="hidden" th:field="*{animeVideo}"/>
+				                <div id="video_preview" class="video-preview">
+									<video width="518" height="380" controls>
+									    <source th:if="${animes.animeVideo}" th:src="${animes.animeVideo}" type="video/mp4">
+									    Your browser does not support the video tag.
+										</video>
+
+								</div>
+				            </div>
+				            <div class="form_div">
+				                <label>Anime Image</label><br>
+				                <input type="file" id="anime_image" name="image" accept="image/*" style="width: 470px" required>
+				                    <input type="hidden" th:field="*{animeImage}" />
+				                 <img id="anime_image_preview" th:if="${animes.animeImage}" th:src="${animes.animeImage}"alt="Anime Image Preview" style="height: 380px; width: 518px;"> 
+				            </div>
+				            
+				            
+				            
+				        </div>
+				    </div>
+				    <div class="event_button_content">
+				        <button type="submit">Add</button>
+				    </div>
+				</form>
+            </div>
+        </div>
+    </section>
+    <script>
+        var dropdown = document.getElementsByClassName("event");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === "flex") {
+            dropdownContent.style.display = "none";
+            } else {
+            dropdownContent.style.display = "flex";
+            }
+        });
+        }
+
+        // image output or priview
+       	const image = document.getElementById("anime_image");
+       	const preview = document.getElementById("anime_image_preview");
+       	
+       	image.addEventListener("change", function () {
+			   const file = this.files[0];
+			   
+			   if(file) {
+				   const read = new FileReader();
+				   
+				   read.onload = function (e) {
+					   preview.src = e.target.result;
+					   preview.style.display = "block";
+				   };
+				   read.readAsDataURL(file);
+			   }  else {
+				   preview.src = "#";
+				   preview.style.display="none";
+			   }
+		   });
+       	
+       	  
+        //video logic
+        const trailerInput = document.getElementById("trailer_input");
+		const trailerPreview = document.getElementById("trailer_preview");
+		
+		trailerInput.addEventListener("change", function () {
+		    trailerPreview.innerHTML = ""; // Clear previous previews
+		
+		    for (const file of this.files) {
+		        const videoElement = document.createElement("video");
+		        videoElement.src = URL.createObjectURL(file);
+		        videoElement.controls = true;
+		        trailerPreview.appendChild(videoElement);
+		    }
+		});
+		
+		const videoInput = document.getElementById("video_input");
+		const videoPreview = document.getElementById("video_preview");
+		
+		videoInput.addEventListener("change", function () {
+		    videoPreview.innerHTML = ""; // Clear previous previews
+		
+		    for (const file of this.files) {
+		        const videoElement = document.createElement("video");
+		        videoElement.src = URL.createObjectURL(file);
+		        videoElement.controls = true;
+		        videoPreview.appendChild(videoElement);
+		    }
+		});
+
+    </script>
+</body>
+</html>

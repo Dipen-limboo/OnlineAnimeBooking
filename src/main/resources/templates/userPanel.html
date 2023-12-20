@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration and Login System</title>
+</head>
+<body>
+	<header th:replace="Fragment/header :: header">
+	</header>
+    <div class="container">
+        <h2>List of Registered Users</h2>
+        <table>
+            <tr>
+                <th>User Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Password</th>
+            </tr>
+            <tr th:each="user : ${userList}">
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.phone}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.password}"></td>
+            </tr>
+        </table>
+    </div>
+    <footer th:replace="Fragment/footer :: footer">
+	</footer>
+</body>
+</html>

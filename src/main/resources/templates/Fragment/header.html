@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <link rel="stylesheet" th:href="@{/CSS/style.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Quicksand:wght@600&family=Roboto+Serif:opsz@8..144&family=Roboto:ital,wght@1,300&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.cdnfonts.com/css/montreal" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+</head>
+<body>
+<header th:fragment="header" >
+    <nav class="user_navbar">
+        <div class="logo">
+            <div ><iconify-icon  class="logo_log" icon="ri:movie-2-line"  width="50" height="50"></iconify-icon></div>
+            <div class="logo_content"><a th:href="@{/home}">Anmte</a></div>
+        </div>
+        <div class="user_content">
+            <ul>
+                <li><a th:href="@{/home}">Home</a></li>
+                <li><a th:href="@{/eventpanel}">Event</a></li>
+                <li><a th:href="@{/video}">Video</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <div class="user_nav_profile">
+            <div class="search">
+                <iconify-icon icon="ion:search" style="color: white;" width="35" height="35"></iconify-icon>
+            </div> 
+            <div class="profile_icon" id="profileIcon">
+			    <div class="icon-container">
+			        <iconify-icon class="iconify-person" icon="mdi:user-outline" style="color: white;" width="40" height="40"></iconify-icon>
+			        <ul class="dropdown" sec:authorize="hasAuthority('USER')">
+			            <li><a href="#">Profile</a></li>
+			            <li><form th:action="@{/logout}" method="post">
+							<button type="submit">Logout</button>
+						</form></li>
+			        </ul>
+			    </div>
+			</div>
+        </div>
+    </nav>
+</header>
+ <script>
+		document.addEventListener('click', function (event) {
+		    var profileIcon = document.getElementById('profileIcon');
+		    var dropdown = profileIcon.querySelector('.dropdown');
+		
+		    if (!profileIcon.contains(event.target)) {
+		        dropdown.style.visibility = 'hidden';
+		    }
+		});
+		
+		// Prevent default click action on the icon
+		var iconContainer = document.querySelector('.icon-container');
+		iconContainer.addEventListener('click', function (event) {
+		    event.preventDefault();
+		});
+ </script>     
+</body>
+</html>
