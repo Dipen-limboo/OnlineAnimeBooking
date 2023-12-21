@@ -19,4 +19,10 @@ public interface UserService {
 	Long findIdByEmail(String email);
 
 	User getUserById(Long userId);  
+	
+	void updateResetPasswordToken(String token, String email);
+	
+	User getByResetPasswordToken(String token);
+	
+	void updatePassword(User user, String newPassword);
 }

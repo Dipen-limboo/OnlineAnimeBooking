@@ -36,7 +36,9 @@ public class UserConfiguration {
 			"/trailer/**",
 			"/Trailer/**",
 			"/videos/**",
-			"/Videos/**"
+			"/Videos/**",
+			"/forgot_password/**",
+			"/reset_password"
 	};
 	
 

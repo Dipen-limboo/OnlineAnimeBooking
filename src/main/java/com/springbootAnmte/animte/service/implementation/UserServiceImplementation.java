@@ -3,9 +3,11 @@ package com.springbootAnmte.animte.service.implementation;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.springbootAnmte.animte.ExceptionHandler.UserNotFoundException;
 import com.springbootAnmte.animte.entity.Role;
 import com.springbootAnmte.animte.entity.User;
 import com.springbootAnmte.animte.repository.RoleRepository;
@@ -95,6 +97,38 @@ public class UserServiceImplementation implements UserService{
 	public User getUserById(Long userId) {
 		
 		return userRepo.findById(userId).get();
+	}
+
+
+	@Override
+	public void updateResetPasswordToken(String token, String email) throws UserNotFoundException{
+		// TODO Auto-generated method stub
+		User user = userRepo.findByEmail(email);
+		
+		if(user != null) {
+			user.setResetPasswordToken(token);
+			userRepo.save(user);
+		} else {
+			throw new UserNotFoundException("Could not found any user with an email " + email);
+		}
+	}
+	
+	
+
+
+	@Override
+	public User getByResetPasswordToken(String token) {
+		return userRepo.findByResetPasswordToken(token);
+	}
+
+
+	@Override
+	public void updatePassword(User user, String newPassword) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(newPassword);
+		user.setPassword(encodedPassword);
+		user.setResetPasswordToken(null);
+		userRepo.save(user);
 	}
 
 }

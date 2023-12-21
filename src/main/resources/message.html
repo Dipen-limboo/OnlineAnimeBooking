@@ -11,38 +11,25 @@
     <link href="https://fonts.cdnfonts.com/css/montreal" rel="stylesheet">
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </head>
-<body>
+<s>
 <header th:replace="Fragment/header :: header">
 </header>
- <div th:if="${param.error}">
-    <div class="alert alert-danger">Invalid Email or Password</div>
-</div>
-<div th:if="${param.logout}">
-    <div class="alert alert-success"> You have been logged out.</div>
-</div>
  <div>
-	 <form th:action="@{/login}" role="form"  method="post" >
-	  <div class="form_div">
-		 <label>Email</label>
-	 	<input type="text" name="username"  placeholder="xyz@gmail.com"/>
-	  </div>
-	  <div class="form_div">
-		 <label>Password</label>
-	 	<input type="password" name="password"  placeholder="Enter your password"/>
-	  </div>
-
-	  <div>
-		  <button type="submit">Login</button>
-		 
-		   <span> Not registered ?
-	            <a th:href="@{/register}">Register/Signup here</a>
-	        </span>
-        </div>
-        <p> <a th:href="@{/forgot_password}" style="color:black">Forgot your password?</a></p>
-	 </form>
- </div>
+    <h2>Error Message</h2>
+</div>
+<div th:object="${message}">
+	<p th:text="${message}"></p>
+</div>
 <footer th:replace="Fragment/footer :: footer">
 </footer>
-     
+  <script>
+	  function checkPasswordMatch(fieldConfirmPassword) {
+    if (fieldConfirmPassword.value != $("#password").val()) {
+        fieldConfirmPassword.setCustomValidity("Passwords do not match!");
+    } else {
+        fieldConfirmPassword.setCustomValidity("");
+    }
+}
+  </script>   
 </body>
 </html>

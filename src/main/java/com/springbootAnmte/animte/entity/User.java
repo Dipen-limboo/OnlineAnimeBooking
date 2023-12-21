@@ -45,6 +45,9 @@ jakarta.validation.constraints.Pattern;
 	@Column(name = "email")
 	@Email 
 	private String email;
+	
+	@Column(name = "reset_password_token")
+    private String resetPasswordToken;
 	 
 	@Column(name= "phone")
 	@Pattern(regexp="^(98|97)\\d{8}$",
@@ -71,8 +74,10 @@ jakarta.validation.constraints.Pattern;
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
 	public User(long userId, @NotBlank(message = "Username is required!!") String username, String password,
-			String confirmPassword, @Email String email,
+			String confirmPassword, @Email String email, String resetPasswordToken,
 			@Pattern(regexp = "^(98|97)\\d{8}$", message = "{The phone number must be number start with 97 or 98, it must contains 10 number}") String phone,
 			List<Role> roles, boolean isEnabled, Set<Booking> bookings) {
 		super();
@@ -81,11 +86,14 @@ jakarta.validation.constraints.Pattern;
 		this.password = password;
 		ConfirmPassword = confirmPassword;
 		this.email = email;
+		this.resetPasswordToken = resetPasswordToken;
 		this.phone = phone;
 		this.roles = roles;
 		this.isEnabled = isEnabled;
 		this.bookings = bookings;
 	}
+
+
 
 	public long getUserId() {
 		return userId;
@@ -153,6 +161,14 @@ jakarta.validation.constraints.Pattern;
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	public String getResetPasswordToken() {
+		return resetPasswordToken;
+	}
+
+	public void setResetPasswordToken(String resetPasswordToken) {
+		this.resetPasswordToken = resetPasswordToken;
 	}
 
 	public Set<Booking> getBookings() {
