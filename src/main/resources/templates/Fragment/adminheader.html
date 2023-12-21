@@ -13,11 +13,11 @@
 </head>
 	<div class="admin_nav_profile" th:fragment="adminheader">
             <div class="search">
-                <iconify-icon icon="ion:search" style="color: black;" width="35" height="35"></iconify-icon>
+                <iconify-icon icon="ion:search" style="color: black;transition: color 1s;" width="35" height="35" onmouseover="this.style.color='#C11119'" onmouseout="this.style.color='black'"></iconify-icon>
             </div> 
             <div class="profile_icon" id="profileIcon">
 			    <div class="icon-container">
-			        <iconify-icon class="iconify-person" icon="mdi:user-outline" style="color: black;" width="40" height="40"></iconify-icon>
+			        <iconify-icon class="iconify-person" icon="mdi:user-outline" style="color: black;transition: color 1s;" width="40" height="40" onmouseover="this.style.color='#C11119'" onmouseout="this.style.color='black'"></iconify-icon>
 			        <ul class="dropdown" sec:authorize="hasAuthority('ADMIN')">
 			            <li><a href="#">Profile</a></li>
 			            <li><form th:action="@{/logout}" method="post">

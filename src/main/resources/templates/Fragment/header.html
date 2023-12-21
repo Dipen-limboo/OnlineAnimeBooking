@@ -29,17 +29,24 @@
 
         <div class="user_nav_profile">
             <div class="search">
-                <iconify-icon icon="ion:search" style="color: white;" width="35" height="35"></iconify-icon>
+                <iconify-icon icon="ion:search" style="color: white;transition: color 1s;" width="35" height="35" onmouseover="this.style.color='#C11119'" onmouseout="this.style.color='white'"></iconify-icon>
             </div> 
             <div class="profile_icon" id="profileIcon">
 			    <div class="icon-container">
-			        <iconify-icon class="iconify-person" icon="mdi:user-outline" style="color: white;" width="40" height="40"></iconify-icon>
-			        <ul class="dropdown" sec:authorize="hasAnyAuthority('USER', 'ADMIN')">
-			            <li><a href="#">Profile</a></li>
-			            <li><form th:action="@{/logout}" method="post">
-							<button type="submit">Logout</button>
-						</form></li>
-			        </ul>
+					<iconify-icon class="iconify-person" icon="mdi:user-outline" style="color: white;transition: color 1s;" width="40" height="40" onmouseover="this.style.color='#C11119'" onmouseout="this.style.color='white'"></iconify-icon>
+			         
+			        <ul th:if="${#authorization.expression('hasAnyAuthority(''USER'', ''ADMIN'')')}" class="dropdown" sec:authorize="hasAnyAuthority('USER', 'ADMIN')">
+					    <li><a href="#">Profile</a></li>
+					    <li>
+					        <form th:action="@{/logout}" method="post">
+					            <button type="submit">Logout</button>
+					        </form>
+					    </li>
+					</ul>
+					<ul th:unless="${#authorization.expression('hasAnyAuthority(''USER'', ''ADMIN'')')}" class="dropdown">
+					    <li><a th:href="@{/login}">Login</a></li>
+					</ul>
+
 			    </div>
 			</div>
         </div>

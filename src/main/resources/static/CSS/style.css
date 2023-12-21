@@ -115,6 +115,13 @@ body a{
     font-size:19px;
 }
 
+
+.user_content ul li a:hover{
+	color: var(--secondary-color);
+	transition: 1s ease;
+	font-size: 20px;
+} 
+
 .user_nav_profile {
     display: flex;
     flex-direction: row;
@@ -140,6 +147,7 @@ body a{
     background-position: center;
  	background-size: cover;
 }
+
 
 .user-content-body-top {
   margin: 50px;
