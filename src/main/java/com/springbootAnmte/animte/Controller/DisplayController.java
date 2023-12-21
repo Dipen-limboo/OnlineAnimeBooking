@@ -3,20 +3,27 @@ package com.springbootAnmte.animte.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.springbootAnmte.animte.entity.Anime;
+import com.springbootAnmte.animte.entity.Booking;
 import com.springbootAnmte.animte.entity.Event;
 import com.springbootAnmte.animte.service.AnmteService;
+import com.springbootAnmte.animte.service.UserService;
 
 @Controller
 public class DisplayController {
 	@Autowired
 	private AnmteService anmteService;
+	
+	@Autowired 
+	private UserService userService;
 
 	public DisplayController(AnmteService anmteService) {
 		super();
@@ -51,8 +58,17 @@ public class DisplayController {
 	
 	@GetMapping("/ticket/evsd{evId}")
 	public String eventShow(@PathVariable Long evId, Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+		    UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		    Long userId = userService.findIdByEmail(userDetails.getUsername()); // You need to implement this method
+		    model.addAttribute("userId", userId);
+		}
+
 	Event event = anmteService.getEventById(evId);
 	model.addAttribute("events", event);
+	Booking booking = new Booking();
+	model.addAttribute("bookings", booking);
 	return "eventShow";
 	}
 	

@@ -83,4 +83,18 @@ public class UserServiceImplementation implements UserService{
 		return userRepo.findAll();
 	}
 
+
+	@Override
+	public Long findIdByEmail(String email) {
+		User user = userRepo.findByEmail(email);
+		return (user!=null)?user.getUserId():null;
+	}
+
+
+	@Override
+	public User getUserById(Long userId) {
+		
+		return userRepo.findById(userId).get();
+	}
+
 }

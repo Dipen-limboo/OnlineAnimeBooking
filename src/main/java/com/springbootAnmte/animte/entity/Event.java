@@ -4,15 +4,19 @@ package com.springbootAnmte.animte.entity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -59,8 +63,6 @@ public class Event {
     @Column(name="image_location")
     @Value("${image.dir:defaultValue}")
     private String imageLocation;
-    
-    
 
     @Column(name="event_description")
     private String eventDescription;
@@ -71,19 +73,27 @@ public class Event {
     
     @Column(name="trending")
     private boolean trending = false;
-
+    
+   
+    @OneToMany(mappedBy="events", cascade =CascadeType.ALL)
+    private Set<Booking> bookings = new HashSet<>();
+    
+    
 	public Event() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Event(@NotBlank(message = "Event title is required!!") String eventTitle, LocalDate startDate,
+		
+	public Event(long eventId, @NotBlank(message = "Event title is required!!") String eventTitle, LocalDate startDate,
 			LocalDate endDate, LocalTime startTime, LocalTime endTime,
 			@NotBlank(message = "Event location is required!!") String eventLocation,
 			@NotNull(message = "Enter the allocated tickets for event!!") long allocatedTickets,
 			@NotBlank(message = "Image is required!!") String eventImage, String imageLocation, String eventDescription,
-			@NotNull(message = "Price of ticket is required!!") double ticketPrice, boolean trending) {
+			@NotNull(message = "Price of ticket is required!!") double ticketPrice, boolean trending,
+			Set<Booking> bookings) {
 		super();
+		this.eventId = eventId;
 		this.eventTitle = eventTitle;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -96,7 +106,9 @@ public class Event {
 		this.eventDescription = eventDescription;
 		this.ticketPrice = ticketPrice;
 		this.trending = trending;
+		this.bookings = bookings;
 	}
+
 
 	public long getEventId() {
 		return eventId;
@@ -202,7 +214,15 @@ public class Event {
 		this.trending = trending;
 	}
 
-	
-    
+
+	public Set<Booking> getBookings() {
+		return bookings;
+	}
+
+
+	public void setBookings(Set<Booking> bookings) {
+		this.bookings = bookings;
+	}
+ 
 }
 

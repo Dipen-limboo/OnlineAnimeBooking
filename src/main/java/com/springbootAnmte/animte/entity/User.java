@@ -2,7 +2,9 @@
 package com.springbootAnmte.animte.entity;
  
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -14,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
@@ -25,60 +28,65 @@ jakarta.validation.constraints.Pattern;
  @Table(name = "users") 
  public class User {
   
-	 @Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY) 
-	 private long userId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	private long userId;
 	 
-	 @Column(name ="username")
-	 @NotBlank(message = "Username is required!!") 
-	 private String username;
+	@Column(name ="username")
+	@NotBlank(message = "Username is required!!") 
+	private String username;
+		
+	@Column(name ="password")
+	private String password;
+	 
+	@Transient
+	private String ConfirmPassword;
 	
-	
-	 @Column(name ="password")
-	 private String password;
-	  
-	 @Transient
-	 private String ConfirmPassword;
+	@Column(name = "email")
+	@Email 
+	private String email;
 	 
-	 @Column(name = "email")
-	 @Email 
-	 private String email;
+	@Column(name= "phone")
+	@Pattern(regexp="^(98|97)\\d{8}$",
+	message="{The phone number must be number start with 97 or 98, it must contains 10 number}"
+	)
+	private String phone;
 	 
-	 @Column(name= "phone")
-	 @Pattern(regexp="^(98|97)\\d{8}$",
-	 message="{The phone number must be number start with 97 or 98, it must contains 10 number}"
-	 )
-	 private String phone;
-	 
-	 @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-	 @JoinTable(
+	@ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinTable(
 	         name="users_roles",
 	         joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="USERID")},
 	         inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
-	 private List<Role> roles = new ArrayList<>();
+	private List<Role> roles = new ArrayList<>();
 	
-	 @Transient
-	 private boolean isEnabled;
+	@Transient
+	private boolean isEnabled;
+	 
+	@OneToMany(mappedBy="users", cascade=CascadeType.ALL)
+	private Set<Booking> bookings = new HashSet<>();
+
+	 
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	public User(long user_id, @NotBlank(message = "Username is required!!") String username,
-			String password,
-			String ConfirmPassword, @Email String email,
+
+	public User(long userId, @NotBlank(message = "Username is required!!") String username, String password,
+			String confirmPassword, @Email String email,
 			@Pattern(regexp = "^(98|97)\\d{8}$", message = "{The phone number must be number start with 97 or 98, it must contains 10 number}") String phone,
-			List<com.springbootAnmte.animte.entity.Role> roles) {
+			List<Role> roles, boolean isEnabled, Set<Booking> bookings) {
 		super();
-		this.userId = user_id;
+		this.userId = userId;
 		this.username = username;
 		this.password = password;
-		this.ConfirmPassword = ConfirmPassword;
+		ConfirmPassword = confirmPassword;
 		this.email = email;
 		this.phone = phone;
 		this.roles = roles;
+		this.isEnabled = isEnabled;
+		this.bookings = bookings;
 	}
-	
+
 	public long getUserId() {
 		return userId;
 	}
@@ -136,10 +144,25 @@ jakarta.validation.constraints.Pattern;
 		this.roles = roles;
 	}
 
+
+	public void setEnabled(boolean isEnabled) {
+		this.isEnabled = isEnabled;
+	}
+
+
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	public Set<Booking> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(Set<Booking> bookings) {
+		this.bookings = bookings;
+	}
+
+	
 }
  

@@ -39,14 +39,21 @@
                     <p>Date: [[${events.startDate}]]</p>
                     <p>Time: [[${events.startTime}]]</p>
                     <p>Location: [[${events.eventLocation}]]</p>
-                    <p th:if="${events.allocatedTickets > 0}">Allocated Tickets: <span>Available</span></p>
-                    <p th:unless="${events.allocatedTickets > 0}">Allocated Tickets: <span>Unavailable</span></p>
+					<p th:if="${events.allocatedTickets > 0 }">
+					    Allocated Tickets: <span>Available</span>
+					</p>
+                    <p th:unless="${events.allocatedTickets > 0 }">Allocated Tickets: <span>Unavailable</span></p>
+                    
                 </div>   
                 <div class="booking-body-bottom-content"> 
-                    <form action="">      
+                    <form th:action="@{/booking/eas{eid}anduisd{uid}(eid=${events.eventId}, uid=${userId})}" th:object="${bookings}" method="post">  
+					
                         <label>Number of Tickets:</label> <br>
-                        <input id="tickets" type="number" name="tickets"  placeholder="1">
-                        <br><a href="#"><button>Buy-Ticket</button></a>
+                        <input id="tickets" type="number" name="buy_ticket" th:field="*{numberOfTickets}" value="1">
+                        <input type="hidden" name="event_id" th:value="${events.eventId}"/>
+                        <input type="hidden" name="user_id" th:value="${userId}"/>
+
+                        <br><a><button>Buy-Ticket</button></a>
                       </form>
                 </div>
             </div>

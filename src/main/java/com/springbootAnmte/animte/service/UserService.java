@@ -16,4 +16,7 @@ public interface UserService {
 
 	void saveAdmin(@Valid User admin);
 	
+	Long findIdByEmail(String email);
+
+	User getUserById(Long userId);  
 }
