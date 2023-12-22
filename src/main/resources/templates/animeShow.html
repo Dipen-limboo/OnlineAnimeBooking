@@ -15,7 +15,7 @@
 
 <header th:replace="Fragment/header :: header">
 </header>
-<div sec:authorize='hasAuthority("USER")'>
+
 <section id="anime_show" th:object="${anime}">
    <video class="video" controls>
 	    <source th:src="@{/trailer/{filename}(filename=${anime.animeTrailer})}" type="video/mp4">
@@ -48,14 +48,40 @@
         </div>
     </div>
 </section> 
-</div> 
+
 <footer th:replace="Fragment/footer :: footer">
    
 </footer>
  
 
 <script>
-    document.getElementById("tickets").defaultValue = "1";
+   
+    document.addEventListener('DOMContentLoaded', function () {
+    var profileIcon = document.getElementById('profileIcon');
+    var iconContainer = document.querySelector('.icon-container');
+    var searchIcon = document.getElementById('searchIcon');
+    var crossIcon = document.getElementById('crossIcon');
+    var searchContainer = document.querySelector('.srch');
+
+   
+
+    function toggleSearch() {
+        if (searchContainer.classList.contains('active')) {
+            searchContainer.classList.remove('active');
+            setTimeout(function () {
+                searchContainer.style.zIndex = '-1';
+            });
+        } else {
+            searchContainer.style.zIndex = '1';
+            setTimeout(function () {
+                searchContainer.classList.add('active');
+            });
+        }
+    }
+
+    searchIcon.addEventListener('click', toggleSearch);
+    crossIcon.addEventListener('click', toggleSearch);
+});
 </script>
 </body>
 </html>

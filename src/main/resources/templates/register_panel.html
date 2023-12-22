@@ -14,15 +14,28 @@
 <div>
 <header th:replace="Fragment/header :: header">
 </header>
- <div class="card-header">
-      <h2 class="text-center">Registration</h2>
+<section  class="event_show" id="event_show" th:style="'background-image: url('+
+@{/Images/Roronoa.jpg}+');'">
+    <div class="event-show-content" >
+        <div class="event-show-content-h2-login">
+            <h2 style="color: var(--font-color);letter-spacing: 1.5px;font-size: 36px;">MY ACCOUNT</h2>
+            <div class="event-show-content-div">
+             <a href="@{/login}"><button>LOG IN</button></a>
+             <a href="#register"><button>REGISTER</button></a>
+            </div>  
+        </div>
+    </div>
+</section>
+ <section id="register">
+	 <div class="booking-heading">
+      <h2>Registration</h2>
   </div>
-  <div th:if="${param.success}">
+  <div th:if="${param.success}" class="messsage_div">
       <div class="alert alert-info">
         You have successfully registered our Site!
       </div>
   </div>
- <div>
+ <div class="login_form_div">
 	 <form th:action="@{/register/save}" th:object="${user}" method="post">
 
 	 <div class="form_div">
@@ -40,21 +53,70 @@
 	  </div>
 	  <div class="form_div">
 		 <label>Password</label>
-	 	<input type="password" name="password" placeholder="Enter your password" th:field="*{password}"  />
+	 	<input type="password" name="password" id="password" placeholder="Enter your password" th:field="*{password}"  required autofocus />
 	  </div>
 	  <div class="form_div">
 		 <label>Confirm Password</label>
-	 	<input type="password" name="cpassword" th:field="*{ConfirmPassword}" placeholder="Re-Enter your password"/>
+	 	<input type="password"  th:field="*{ConfirmPassword}" placeholder="Re-Enter your password" required oninput="checkPasswordMatch(this);"/>
 	  </div>
-	  <div class="form-group">
+	  <div class="login-button">
           <button class="btn btn-primary" type="submit">Register</button>
           <span>Already registered? <a th:href="@{/login}">Login here</a></span>
         </div>
 	 </form>
  </div>
+ </section>
 
 <footer th:replace="Fragment/footer :: footer">
 </footer>
-     
+     <script>
+	  function checkPasswordMatch(fieldConfirmPassword) {
+    if (fieldConfirmPassword.value != $("#password").val()) {
+        fieldConfirmPassword.setCustomValidity("Passwords do not match!");
+    } else {
+        fieldConfirmPassword.setCustomValidity("");
+    }
+	}
+	document.addEventListener('DOMContentLoaded', function () {
+    var profileIcon = document.getElementById('profileIcon');
+    var iconContainer = document.querySelector('.icon-container');
+    var searchIcon = document.getElementById('searchIcon');
+    var crossIcon = document.getElementById('crossIcon');
+    var searchContainer = document.querySelector('.srch');
+
+    document.addEventListener('click', function (event) {
+        var dropdown = profileIcon.querySelector('.dropdown');
+
+        if (!profileIcon.contains(event.target)) {
+            dropdown.style.visibility = 'hidden';
+        } else {
+            dropdown.style.visibility = (dropdown.style.visibility === 'visible') ? 'hidden' : 'visible';
+        }
+    });
+
+    // Prevent default click action on the icon
+    iconContainer.addEventListener('click', function (event) {
+        event.preventDefault();
+    });
+
+    function toggleSearch() {
+        if (searchContainer.classList.contains('active')) {
+            searchContainer.classList.remove('active');
+            setTimeout(function () {
+                searchContainer.style.zIndex = '-1';
+            });
+        } else {
+            searchContainer.style.zIndex = '1';
+            setTimeout(function () {
+                searchContainer.classList.add('active');
+            });
+        }
+    }
+
+    searchIcon.addEventListener('click', toggleSearch);
+    crossIcon.addEventListener('click', toggleSearch);
+});
+
+  </script>  
 </body>
 </html>

@@ -446,7 +446,7 @@ footer .logo_content a{
 
 .footer-icon ul li a:hover{
     color: #C11119;
-    font-size: 30px;
+    
     transition: 0.5s ease-out;
 }
 
@@ -461,8 +461,9 @@ footer .logo_content a{
 
 .footer-category-body ul li a:hover {
     text-decoration: underline;
-    padding-left: 20px;
+    padding-left: 15px;
     transition: 0.5s ease-in;
+    color: var(--secondary-color)
 }
 
 .footer-copyright {
@@ -508,8 +509,14 @@ footer .logo_content a{
     top: 45%;
     left: 38%;
 }
+.event-show-content-h2-login {
+  text-align: center;
+  position: absolute;
+  top: 38%;
+  left: 38%;
+}
 
-.event-show-content-h2 h3 {
+.event-show-content-h2 h3, .event-show-content-h2-login h3 {
   font-size: 16px;
   padding: 11px;
   color: var(--secondary-color);
@@ -763,7 +770,7 @@ footer .logo_content a{
 
 .dropdown li form button {
   border: none;
-  background-color: var(--primary-color);
+  background-color: transparent;
   color: var(--font-color);
   font-size: 18px;
 }
@@ -776,4 +783,213 @@ footer .logo_content a{
 	cursor: pointer;
 } 
 
+.login_form_div {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.login_form_div .form_div {
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.login_form_div form {
+  width: 612px;
+  margin-left: 40px;
+}
+
+.login_form_div .form_div label {
+  padding: 0 0 10px 0;
+  letter-spacing: 1px;
+  font-size: 17px;
+}
+
+.login_form_div .form_div input {
+  height: 35px;
+  padding-left: 5px;
+  width: 600px;
+}
+
+.messsage_div {
+  display: flex;
+  justify-content: center;
+  padding-top: 43px;
+  font-size: 22px;
+}
+
+.login-button {
+  display: flex;
+  flex-direction: column;	
+  padding-bottom: 55px;
+}
+
+.login-button button {
+  height: 41px;
+  width: 139px;
+  margin-top: 15px;
+  font-size: 18px;
+  color: white;
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  border: none;
+}
+
+.login-button button:hover{
+    background-color: var(--font-color);
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    transition: 0.5s ease-out;
+}
+
+.login-button p {
+  padding: 10px 0;
+  text-decoration: underline;
+}
+
+.login-button p a {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--sub-heading-color);
+}
+
+.login-button span {
+  font-size: 17px;
+  color: var(--secondary-font-color);
+  padding-top: 15px;
+}
+
+.login-button span a {
+  color: var(--sub-heading-color);
+  font-style: italic;
+  font-size: 15px;
+}
+
+.messsage_div_reset {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  font-size: 22px;
+}
+
+.login-button_reset button {
+  height: 41px;
+  width: 139px;
+  margin-top: 15px;
+  font-size: 18px;
+  color: white;
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  border: none;
+  margin-left:230px;
+}
+
+.login-button_reset button:hover{
+    background-color: var(--font-color);
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    transition: 0.5s ease-out;
+}
+
+.goback_login {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  margin-top: 20px;
+  width: 97px;
+}
+
+.goback_icon {
+  border: 1px solid transparent;
+  background: var(--sub-heading-color);
+  padding: 3px 6px 7px 5px;
+  height: 17px;
+  border-radius: 20px;
+}
+
+.goback_login:hover .goback_icon {
+	background-color: var(--secondary-color);
+	transition: 1s ease;
+}
+.goback_login div p {
+  font-size: 15px;
+  font-style: italic;
+  color: var(--sub-heading-color);
+  text-decoration: underline;
+}
+
+.goback_login div p:hover{
+	color: var(--secondary-color);
+	transition: 1s ease;
+	font-size: 16px;
+}
+
+
+  /* search */
+.srch {
+    display: flex;
+    flex-direction: column;
+    z-index: -1;
+    position: absolute;
+    min-height: 100vh;
+    width: 100%;
+    justify-content: center;
+    background-color: transparent;
+    opacity: 0; 
+    transform: translateY(-100%); 
+    transition: opacity 1s ease,z-index 1s, transform 1s ease; 
+}
+
+.srch.active {
+    z-index: 1;
+    opacity: 1;
+    transform: translateY(0%);
+}
+
+.srch_abc {
+    position: absolute;
+    top: 0%;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.7;
+}
+
+.serch_text {
+    position: absolute;
+    left: 35%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+
+.serch_text input {
+    height: 40px;
+    width: 500px;
+
+    border-radius: 10px;
+    padding-left: 10px;
+    font-size: 20px;
+}
+
+.search-text{
+    padding-top: 2px;
+}
+
+.cross-icon {
+    position: absolute;
+    right: 7.5%;
+    top: 3%;
+    cursor: pointer;
+}
+
+
+iconify-icon{
+	cursor: pointer;
+}
 

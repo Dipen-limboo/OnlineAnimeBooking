@@ -13,6 +13,21 @@
 </head>
 <body>
 <header th:fragment="header" >
+<div class="srch" th:if="${#authorization.expression('hasAnyAuthority(''USER'', ''ADMIN'')')}"  sec:authorize="hasAnyAuthority('USER', 'ADMIN')">
+    <form action="">
+      <div class="srch_abc">
+      </div>
+      <div class="cross-icon">
+        <iconify-icon id="crossIcon" icon="maki:cross" width="35" height="35" style="color: white"></iconify-icon>
+      </div>
+      <div class="serch_text">
+        <input type="text" placeholder="Search.........">
+        <div class="search-text">
+          <iconify-icon icon="ion:search" style="color: white" width="35" height="35"></iconify-icon> 
+        </div>
+      </div>
+    </form>
+  </div>
     <nav class="user_navbar">
         <div class="logo">
             <div ><iconify-icon  class="logo_log" icon="ri:movie-2-line"  width="50" height="50"></iconify-icon></div>
@@ -29,7 +44,7 @@
 
         <div class="user_nav_profile">
             <div class="search">
-                <iconify-icon icon="ion:search" style="color: white;transition: color 1s;" width="35" height="35" onmouseover="this.style.color='#C11119'" onmouseout="this.style.color='white'"></iconify-icon>
+                <iconify-icon id="searchIcon" icon="ion:search" style="color: white;transition: color 1s;" width="35" height="35" onmouseover="this.style.color='#C11119'" onmouseout="this.style.color='white'"></iconify-icon>
             </div> 
             <div class="profile_icon" id="profileIcon">
 			    <div class="icon-container">
@@ -53,20 +68,45 @@
     </nav>
 </header>
  <script>
-		document.addEventListener('click', function (event) {
-		    var profileIcon = document.getElementById('profileIcon');
-		    var dropdown = profileIcon.querySelector('.dropdown');
-		
-		    if (!profileIcon.contains(event.target)) {
-		        dropdown.style.visibility = 'hidden';
-		    }
-		});
-		
-		// Prevent default click action on the icon
-		var iconContainer = document.querySelector('.icon-container');
-		iconContainer.addEventListener('click', function (event) {
-		    event.preventDefault();
-		});
+	 document.addEventListener('DOMContentLoaded', function () {
+    var profileIcon = document.getElementById('profileIcon');
+    var iconContainer = document.querySelector('.icon-container');
+    var searchIcon = document.getElementById('searchIcon');
+    var crossIcon = document.getElementById('crossIcon');
+    var searchContainer = document.querySelector('.srch');
+
+    document.addEventListener('click', function (event) {
+        var dropdown = profileIcon.querySelector('.dropdown');
+
+        if (!profileIcon.contains(event.target)) {
+            dropdown.style.visibility = 'hidden';
+        } else {
+            dropdown.style.visibility = (dropdown.style.visibility === 'visible') ? 'hidden' : 'visible';
+        }
+    });
+
+    // Prevent default click action on the icon
+    iconContainer.addEventListener('click', function (event) {
+        event.preventDefault();
+    });
+
+    function toggleSearch() {
+        if (searchContainer.classList.contains('active')) {
+            searchContainer.classList.remove('active');
+            setTimeout(function () {
+                searchContainer.style.zIndex = '-1';
+            });
+        } else {
+            searchContainer.style.zIndex = '1';
+            setTimeout(function () {
+                searchContainer.classList.add('active');
+            });
+        }
+    }
+
+    searchIcon.addEventListener('click', toggleSearch);
+    crossIcon.addEventListener('click', toggleSearch);
+});
  </script>     
 </body>
 </html>

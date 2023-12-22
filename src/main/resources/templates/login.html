@@ -11,38 +11,58 @@
     <link href="https://fonts.cdnfonts.com/css/montreal" rel="stylesheet">
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </head>
-<body>
+<section>
 <header th:replace="Fragment/header :: header">
 </header>
- <div th:if="${param.error}">
-    <div class="alert alert-danger">Invalid Email or Password</div>
-</div>
-<div th:if="${param.logout}">
-    <div class="alert alert-success"> You have been logged out.</div>
-</div>
- <div>
-	 <form th:action="@{/login}" role="form"  method="post" >
-	  <div class="form_div">
-		 <label>Email</label>
-	 	<input type="text" name="username"  placeholder="xyz@gmail.com"/>
-	  </div>
-	  <div class="form_div">
-		 <label>Password</label>
-	 	<input type="password" name="password"  placeholder="Enter your password"/>
-	  </div>
-
-	  <div>
-		  <button type="submit">Login</button>
-		 
-		   <span> Not registered ?
-	            <a th:href="@{/register}">Register/Signup here</a>
-	        </span>
+<section  class="home_page" id="event_show" th:style="'background-image: url('+
+@{/Images/Roronoa.jpg}+');' ">
+    <div class="event-show-content" >
+        <div class="event-show-content-h2-login">
+            <h2 style="color: var(--font-color);letter-spacing: 1.5px;font-size: 36px;">MY ACCOUNT</h2>
+            <div class="event-show-content-div">
+             <a href="#Login"><button>LOG IN</button></a>
+             <a th:href="@{/register}"><button>REGISTER</button></a>
+            </div>  
         </div>
-        <p> <a th:href="@{/forgot_password}" style="color:black">Forgot your password?</a></p>
-	 </form>
- </div>
+    </div>
+</section>
+ <section id="Login">
+	 <div class="booking-heading">
+		 <h2>Log in</h2>
+	 </div>
+	 <div th:if="${param.error}" class="messsage_div">
+	    <div class="alert alert-danger">Invalid Email or Password</div>
+	</div>
+	<div th:if="${param.logout}" class="messsage_div">
+	    <div class="alert alert-success"> You have been logged out.</div>
+	</div>
+	 <div class="login_form_div">
+		 <form th:action="@{/login}" role="form"  method="post" >
+		  <div class="form_div">
+			 <label>Email</label>
+		 	<input type="text" name="username"  placeholder="xyz@gmail.com"/>
+		  </div>
+		  <div class="form_div">
+			 <label>Password</label>
+		 	<input type="password" name="password"  placeholder="Enter your password"/>
+		  </div>
+	
+		  <div class="login-button">
+			  <button type="submit">Login</button>
+			  <p> <a th:href="@{/forgot_password}" >Forgot your password?</a></p>
+			   <span> Not registered ?
+		            <a th:href="@{/register}" >Register/Signup</a>
+		        </span>
+	        </div>
+	       
+		 </form>
+	 </div>
+ </section>
+
 <footer th:replace="Fragment/footer :: footer">
 </footer>
-     
+<script>
+	
+</script>     
 </body>
 </html>

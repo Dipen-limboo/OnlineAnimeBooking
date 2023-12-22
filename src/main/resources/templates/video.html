@@ -89,6 +89,11 @@
     document.addEventListener("DOMContentLoaded", function () {
     let currentIndex = 0;
     const slides = document.querySelectorAll(".user-content-body");
+    var profileIcon = document.getElementById('profileIcon');
+    var iconContainer = document.querySelector('.icon-container');
+    var searchIcon = document.getElementById('searchIcon');
+    var crossIcon = document.getElementById('crossIcon');
+    var searchContainer = document.querySelector('.srch');
     
     function showSlide(index) {
         slides.forEach((slide) => {
@@ -110,8 +115,27 @@
 
     showSlide(currentIndex);
     startSlideshow();
+    
+    
+
+    function toggleSearch() {
+        if (searchContainer.classList.contains('active')) {
+            searchContainer.classList.remove('active');
+            setTimeout(function () {
+                searchContainer.style.zIndex = '-1';
+            });
+        } else {
+            searchContainer.style.zIndex = '1';
+            setTimeout(function () {
+                searchContainer.classList.add('active');
+            });
+        }
+    }
+
+    searchIcon.addEventListener('click', toggleSearch);
+    crossIcon.addEventListener('click', toggleSearch);
 });
 
-</script>        
+</script>         
 </body>
 </html>
