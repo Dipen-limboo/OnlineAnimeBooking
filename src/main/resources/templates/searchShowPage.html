@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search page</title>
+    <link rel="stylesheet" th:href="@{/CSS/style.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Quicksand:wght@600&family=Roboto+Serif:opsz@8..144&family=Roboto:ital,wght@1,300&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.cdnfonts.com/css/montreal" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+</head>
+<body>
+<header th:replace="Fragment/header :: header">
+</header>
+<section class="home_page" id="home_page">
+    <div class="user-container">
+		
+		                                 <!--           Event search              -->
+		                                 
+        <div class="user-content-body fade" th:if="${event != null}" th:style="'background-image:url('+@{/images/{filename}(filename=${event.eventImage})}+');'">
+            <div class="user-content-body-top">
+                <h2>From [[${#dates.format(#dates.create(event.startDate.year, event.startDate.monthValue, event.startDate.dayOfMonth), 'MMM, dd yyyy')}]]</h2>
+                <h2>To  [[${#dates.format(#dates.create(event.endDate.year, event.endDate.monthValue, event.endDate.dayOfMonth), 'MMM, dd yyyy')}]] </h2>
+            </div>
+            <div class="user-content-body-down">
+                <div class="content-details-div">
+                    <h2>[[${event.eventTitle}]]</h2>
+                    <h3>Date: [[${event.startDate}]] </h3>
+                    <h3>Time: [[${event.startTime}]]</h3>
+                    <h3>Location: [[${event.eventLocation}]] </h3>
+                    <a th:href="@{/ticket/evsd{evId}(evId =${event.eventId})}"><button type="submit">Get-Ticket</button></a>
+                </div>
+            </div>    
+        </div>
+        
+										<!--           Anime name search              -->        
+       
+       <div class="user-content-body fade" th:if="${anime != null}" th:style="'background-image:url('+@{/images/{filename}(filename=${anime.animeImage})}+');'">
+            <div class="user-content-body-down">
+                <div class="content-details-div">
+                    <h2 style="font-size: 25px;padding-top: 5px;">[[${anime.animeName}]] </h2>
+                    <h3 style="font-size: 18px;">Written By [[${anime.animeWriter}]]</h3>
+                    <div class="event-show-content-div" style="padding: 0; justify-content: left;">
+                        <a th:href="@{/video/linksbs{id}(id=${anime.Id})}"><button>Watch Video</button></a>
+                       </div>  
+                </div>
+                <div class="content-details-tailer">
+                    <h2 style="font-size: 25px;padding-top: 5px;">Trailer</h2>
+                    <div class="content-details-trailer-div">
+                        <div class="content-details-image" th:style="'background-image:url('+@{/images/{filename}(filename=${anime.animeImage})}+');'">
+                        </div>
+                        <div class="content-details-image" style="width: 250px;">
+							<video  controls autoplay muted loop style="height: 100%; width: 100%;">
+						        <source th:src="@{/trailer/{filename}(filename=${anime.animeTrailer})}" type="video/mp4">
+						        Your browser does not support the video tag.
+						    </video>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </div>
+        
+        								<!--           Anime Category search              -->       
+        
+        <div class="user-content-body fade" th:if="${category != null}" th:style="'background-image:url('+@{/images/{filename}(filename=${category.animeImage})}+');'">
+            <div class="user-content-body-down">
+                <div class="content-details-div">
+                    <h2 style="font-size: 25px;padding-top: 5px;">[[${category.animeName}]] </h2>
+                    <h3 style="font-size: 18px;">Written By [[${category.animeWriter}]]</h3>
+                    <div class="event-show-content-div" style="padding: 0; justify-content: left;">
+                        <a th:href="@{/video/linksbs{id}(id=${category.Id})}"><button>Watch Video</button></a>
+                       </div>  
+                </div>
+                <div class="content-details-tailer">
+                    <h2 style="font-size: 25px;padding-top: 5px;">Trailer</h2>
+                    <div class="content-details-trailer-div">
+                        <div class="content-details-image" th:style="'background-image:url('+@{/images/{filename}(filename=${category.animeImage})}+');'">
+                        </div>
+                        <div class="content-details-image" style="width: 250px;">
+							<video  controls autoplay muted loop style="height: 100%; width: 100%;">
+						        <source th:src="@{/trailer/{filename}(filename=${category.animeTrailer})}" type="video/mp4">
+						        Your browser does not support the video tag.
+						    </video>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </div>
+		    <div th:unless="${event == null and anime == null and category == null}">
+		  <!--  <h2 style="color: black;">[[${message}]]</h2>-->
+		</div>
+
+</section>
+
+    
+    
+    
+    
+ 
+<footer th:replace="Fragment/footer :: footer">
+   
+</footer>
+<script>
+       document.addEventListener("DOMContentLoaded", function () {
+    let currentIndex = 0;
+    const slides = document.querySelectorAll(".user-content-body");
+    var profileIcon = document.getElementById('profileIcon');
+    var iconContainer = document.querySelector('.icon-container');
+    var searchIcon = document.getElementById('searchIcon');
+    var crossIcon = document.getElementById('crossIcon');
+    var searchContainer = document.querySelector('.srch');
+    
+    function showSlide(index) {
+        slides.forEach((slide) => {
+            slide.style.display = "none";
+        });
+
+        slides[index].style.display = "block";
+    }
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % slides.length;
+        showSlide(currentIndex);
+    }
+
+    function startSlideshow() {
+        setInterval(nextSlide, 10000); 
+    }
+
+
+    showSlide(currentIndex);
+    startSlideshow();
+    
+    
+
+   function submitForm() {
+        document.getElementById('searchForm').submit();
+    }
+   
+
+    function toggleSearch() {
+        if (searchContainer.classList.contains('active')) {
+            searchContainer.classList.remove('active');
+            setTimeout(function () {
+                searchContainer.style.zIndex = '-1';
+            });
+        } else {
+            searchContainer.style.zIndex = '1';
+            setTimeout(function () {
+                searchContainer.classList.add('active');
+            });
+        }
+    }
+
+    searchIcon.addEventListener('click', toggleSearch);
+    crossIcon.addEventListener('click', toggleSearch);
+});
+
+</script>        
+</body>
+</html>

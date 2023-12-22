@@ -72,7 +72,9 @@
     var crossIcon = document.getElementById('crossIcon');
     var searchContainer = document.querySelector('.srch');
 
-    
+    function submitForm() {
+        document.getElementById('searchForm').submit();
+    }
     function toggleSearch() {
         if (searchContainer.classList.contains('active')) {
             searchContainer.classList.remove('active');

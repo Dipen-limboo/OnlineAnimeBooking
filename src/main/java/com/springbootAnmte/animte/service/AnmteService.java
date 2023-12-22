@@ -15,6 +15,7 @@ public interface AnmteService {
 	public Resource load(String filename);
 	String save(MultipartFile file, Event event);
 	List<Event> getTrendingEvents();
+	Event getEventByEventTitle(String search);
 	
 	
 	//anime;
@@ -28,6 +29,9 @@ public interface AnmteService {
 	Anime getAnimeById(Long id);
 	Anime updateAnime(Anime existingAnime);
 	void deleteAnimeById(Long id);
+	Anime getAnimeByAnimeName(String search);
+	Anime getAnimeByCategory(String search);
+	
 		
 	
 }

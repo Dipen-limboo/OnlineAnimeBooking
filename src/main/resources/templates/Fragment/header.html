@@ -14,15 +14,15 @@
 <body>
 <header th:fragment="header" >
 <div class="srch" th:if="${#authorization.expression('hasAnyAuthority(''USER'', ''ADMIN'')')}"  sec:authorize="hasAnyAuthority('USER', 'ADMIN')">
-    <form action="">
+    <form th:action="@{/search}" method="post" id="searchForm">
       <div class="srch_abc">
       </div>
       <div class="cross-icon">
         <iconify-icon id="crossIcon" icon="maki:cross" width="35" height="35" style="color: white"></iconify-icon>
       </div>
       <div class="serch_text">
-        <input type="text" placeholder="Search.........">
-        <div class="search-text">
+        <input type="text" name="search" placeholder="Search.........">
+        <div class="search-text" onclick="submitForm()">
           <iconify-icon icon="ion:search" style="color: white" width="35" height="35"></iconify-icon> 
         </div>
       </div>
@@ -107,6 +107,9 @@
     searchIcon.addEventListener('click', toggleSearch);
     crossIcon.addEventListener('click', toggleSearch);
 });
+ function submitForm() {
+        document.getElementById('searchForm').submit();
+    }
  </script>     
 </body>
 </html>

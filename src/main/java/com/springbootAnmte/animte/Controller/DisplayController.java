@@ -10,12 +10,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import com.springbootAnmte.animte.ExceptionHandler.EventNotFoundException;
 import com.springbootAnmte.animte.entity.Anime;
 import com.springbootAnmte.animte.entity.Booking;
 import com.springbootAnmte.animte.entity.Event;
 import com.springbootAnmte.animte.service.AnmteService;
 import com.springbootAnmte.animte.service.UserService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class DisplayController {
@@ -93,7 +97,23 @@ public class DisplayController {
 	}
 	
 	
-	
+	@PostMapping("/search")
+	public String search(HttpServletRequest request, Model model) {
+		String search = request.getParameter("search");
+		try {
+			Event event = anmteService.getEventByEventTitle(search);
+			Anime anime = anmteService.getAnimeByAnimeName(search); 
+			Anime animeCategory = anmteService.getAnimeByCategory(search); 
+			model.addAttribute("event", event);
+			model.addAttribute("anime", anime);
+			model.addAttribute("category", animeCategory);
+		} catch(EventNotFoundException e) {
+			model.addAttribute("message", "No such type of " + search);
+		}
+		
+		return "searchShowPage";
+		
+	}
 	
 }
 

@@ -212,8 +212,22 @@ public class AnmteServiceImplementation implements AnmteService{
 
 	@Override
 	public List<Event> getTrendingEvents() {
-		// TODO Auto-generated method stub
 		return anmteRepository.findByTrending(Boolean.TRUE);
+	}
+
+	@Override
+	public Event getEventByEventTitle(String search) {
+		return anmteRepository.findByEventTitle(search);
+	}
+
+	@Override
+	public Anime getAnimeByAnimeName(String search) {
+		return anp.findByAnimeName(search);
+	}
+
+	@Override
+	public Anime getAnimeByCategory(String search) {
+		return anp.findByAnimeCategory(search);
 	}
 
 

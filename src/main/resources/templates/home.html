@@ -77,7 +77,9 @@
     var crossIcon = document.getElementById('crossIcon');
     var searchContainer = document.querySelector('.srch');
 
-   
+	   function submitForm() {
+	        document.getElementById('searchForm').submit();
+	    }
 
     function toggleSearch() {
         if (searchContainer.classList.contains('active')) {
@@ -96,6 +98,7 @@
     searchIcon.addEventListener('click', toggleSearch);
     crossIcon.addEventListener('click', toggleSearch);
 });
+
 
 </script>
       

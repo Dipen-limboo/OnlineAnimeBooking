@@ -9,5 +9,9 @@ import com.springbootAnmte.animte.entity.Event;
 
 public interface AnimeRepo extends JpaRepository<Anime, Long>{
 
+	Anime findByAnimeName(String search);
+
+	Anime findByAnimeCategory(String search);
+
 	
 }
