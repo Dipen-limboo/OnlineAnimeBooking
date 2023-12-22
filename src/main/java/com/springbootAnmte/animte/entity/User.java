@@ -37,6 +37,7 @@ jakarta.validation.constraints.Pattern;
 	private String username;
 		
 	@Column(name ="password")
+	@Pattern(regexp="^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")
 	private String password;
 	 
 	@Transient
@@ -74,9 +75,9 @@ jakarta.validation.constraints.Pattern;
 		// TODO Auto-generated constructor stub
 	}
 
-	
 
-	public User(long userId, @NotBlank(message = "Username is required!!") String username, String password,
+	public User(long userId, @NotBlank(message = "Username is required!!") String username,
+			@Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$") String password,
 			String confirmPassword, @Email String email, String resetPasswordToken,
 			@Pattern(regexp = "^(98|97)\\d{8}$", message = "{The phone number must be number start with 97 or 98, it must contains 10 number}") String phone,
 			List<Role> roles, boolean isEnabled, Set<Booking> bookings) {
@@ -92,7 +93,6 @@ jakarta.validation.constraints.Pattern;
 		this.isEnabled = isEnabled;
 		this.bookings = bookings;
 	}
-
 
 
 	public long getUserId() {

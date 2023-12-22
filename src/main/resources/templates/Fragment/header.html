@@ -13,7 +13,7 @@
 </head>
 <body>
 <header th:fragment="header" >
-<div class="srch" th:if="${#authorization.expression('hasAnyAuthority(''USER'', ''ADMIN'')')}"  sec:authorize="hasAnyAuthority('USER', 'ADMIN')">
+<div class="srch">
     <form th:action="@{/search}" method="post" id="searchForm">
       <div class="srch_abc">
       </div>
